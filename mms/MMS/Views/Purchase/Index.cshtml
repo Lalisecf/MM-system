@@ -1,0 +1,49 @@
+﻿@model IEnumerable<MMS.Models.Inventory.PurchaseVM>
+
+@{
+    ViewBag.Title = "Purchase";
+    Layout = "~/Views/Shared/_BestLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header" style="font-weight:bold;background-color:lightgrey">
+        <div class="form-group">
+            <a class="btn btn-outline-primary fa fa-user-plus btn-large" href="/Purchase/AddPurchase"> Add Purchase</a>
+        </div>
+    </div>
+
+    <div class="card-body table-border-style">
+        <div class="table-responsive">
+            <table class="table table-hover" id="commondata">
+                <thead>
+                    <tr>
+                        <th>Ref No</th>
+                        <th>Item</th>
+                        <th>Brand</th>
+                        <th>Type</th>
+                        <th>Quantity</th>
+                        <th>Unit Cost</th>
+                        <th>Total Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var purchase in Model)
+                    {
+                        foreach (var item in purchase.Items)
+                        {
+                            <tr>
+                                <td>@purchase.RefNo</td>
+                                <td>@item.MainItem</td>
+                                <td>@item.Brand</td>
+                                <td>@item.Type</td>
+                                <td>@item.Qty</td>
+                                <td>@item.UnitCost</td>
+                                <td>@item.TotalAmount</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

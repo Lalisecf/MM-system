@@ -1,0 +1,259 @@
+﻿@model MMS.Models.Inventory.PurchaseVM
+
+@{
+    Layout = "~/Views/Shared/_BestLayout.cshtml";
+}
+
+@using (Html.BeginForm("AddPurchase", "Purchase", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="card">
+        <div class="card-header">
+            <h5>Purchase</h5>
+        </div>
+        <div class="card-body table-border-style">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Item">Item</label>
+                        <select id="Item" name="Item" class="form-control" required>
+                            <option value="">-- Select Item --</option>
+                            @foreach (var item in ViewBag.Item as SelectList)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Supplier, "Supplier")
+                        @Html.DropDownListFor(model => model.Supplier, ViewBag.Supplier as SelectList, "-- Select supplier --", new { @class = "form-control select2", @required = "required", @id = "supplier" })
+                        @Html.ValidationMessageFor(model => model.Supplier, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SuppInvNo, "Invoice no")
+                        @Html.TextBoxFor(model => model.SuppInvNo, new { @class = "form-control", @id = "suppInvNo", @required = "required", @placeholder = "Enter inv no" })
+                        @Html.ValidationMessageFor(model => model.SuppInvNo, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemModal">
+                        <i class="fa fa-plus"></i> Add Item
+                    </button>
+                </div>
+            </div>
+
+            <div class="modal fade" id="itemModal" tabindex="-1" role="dialog" aria-labelledby="itemModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="itemModalLabel">Item Info</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="MainItem">Main Item</label>
+                                        <select id="MainItem" name="MainItem" class="form-control">
+                                            <option value="">-- Select Main Item --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Brand">Brand</label>
+                                        @Html.DropDownList("Brand", ViewBag.ItemBrandId as SelectList, "-- Select Brand --", new { @class = "form-control select2" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Qty">Quantity</label>
+                                        <input type="number" id="Qty" class="form-control" placeholder="Enter Quantity" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="UnitCost">UnitCost</label>
+                                        <input type="number" id="UnitCost" class="form-control" placeholder="Enter UnitCost" />
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="TotalAmount">TotalAmount</label>
+                                        <input type="number" id="TotalAmount" class="form-control" placeholder="Enter TotalAmount" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="saveItemBtn">Add Item</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Added Items</h3>
+            <table id="itemsTable" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Main Item</th>
+                        <th>Brand</th>
+                        <th>Quantity</th>
+                        <th>Unit Cost</th>
+                        <th>Total Amount</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-save"></i> Save Purchase
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="hiddenInputs" style="display:none;"></div>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const qtyField = document.getElementById("Qty");
+            const unitCostField = document.getElementById("UnitCost");
+            const totalAmountField = document.getElementById("TotalAmount");
+            const itemsTableBody = document.querySelector("#itemsTable tbody");
+            const form = document.querySelector("form");
+            const hiddenInputsDiv = document.getElementById("hiddenInputs");
+
+            let itemIndex = 0; // Start with index 0
+
+            function calculateAmounts() {
+                const qty = parseFloat(qtyField.value) || 0;
+                const unitCost = parseFloat(unitCostField.value) || 0;
+                const totalAmount_notax = qty * unitCost;
+                const totalAmount = totalAmount_notax;
+
+                totalAmountField.value = totalAmount.toFixed(2);
+            }
+
+            qtyField.addEventListener("input", calculateAmounts);
+            unitCostField.addEventListener("input", calculateAmounts);
+
+            document.getElementById("saveItemBtn").addEventListener("click", function () {
+                const mainItem = document.getElementById("MainItem").value;
+                const brand = document.getElementById("Brand").value;
+                const qty = qtyField.value;
+                const unitCost = unitCostField.value;
+                const totalAmount = totalAmountField.value;
+
+                if (!mainItem || !brand || !qty || !unitCost) {
+                    alert("Please fill in all fields before adding the item.");
+                    return;
+                }
+
+                // Add a new row to the table
+                const row = document.createElement("tr");
+                row.innerHTML = `
+            <td>${mainItem}</td>
+            <td>${brand}</td>
+            <td>${qty}</td>
+            <td>${unitCost}</td>
+            <td>${totalAmount}</td>
+            <td><button type="button" class="btn btn-danger remove-item">Remove</button></td>
+        `;
+                itemsTableBody.appendChild(row);
+
+                // Add hidden inputs for the form submission
+                const hiddenItem = document.createElement("input");
+                hiddenItem.type = "hidden";
+                hiddenItem.name = `Items[${itemIndex}].MainItem`; // Ensure zero-based indexing
+                hiddenItem.value = mainItem;
+                hiddenInputsDiv.appendChild(hiddenItem);
+
+                const hiddenBrand = document.createElement("input");
+                hiddenBrand.type = "hidden";
+                hiddenBrand.name = `Items[${itemIndex}].ItemBrandId`; // Ensure zero-based indexing
+                hiddenBrand.value = brand;
+                hiddenInputsDiv.appendChild(hiddenBrand);
+
+                const hiddenQty = document.createElement("input");
+                hiddenQty.type = "hidden";
+                hiddenQty.name = `Items[${itemIndex}].Qty`; // Ensure zero-based indexing
+                hiddenQty.value = qty;
+                hiddenInputsDiv.appendChild(hiddenQty);
+
+                const hiddenUnitCost = document.createElement("input");
+                hiddenUnitCost.type = "hidden";
+                hiddenUnitCost.name = `Items[${itemIndex}].UnitCost`; // Ensure zero-based indexing
+                hiddenUnitCost.value = unitCost;
+                hiddenInputsDiv.appendChild(hiddenUnitCost);
+
+                const hiddenTotalAmount = document.createElement("input");
+                hiddenTotalAmount.type = "hidden";
+                hiddenTotalAmount.name = `Items[${itemIndex}].TotalAmount`; // Ensure zero-based indexing
+                hiddenTotalAmount.value = totalAmount;
+                hiddenInputsDiv.appendChild(hiddenTotalAmount);
+
+                console.log(`Item Index: ${itemIndex}`);
+                console.log(`Main Item: ${mainItem}, Brand: ${brand}, Qty: ${qty}, Unit Cost: ${unitCost}, Total Amount: ${totalAmount}`);
+
+                itemIndex++; // Increment the index for the next item
+
+                // Clear the modal fields
+                document.getElementById("MainItem").value = '';
+                document.getElementById("Brand").value = '';
+                qtyField.value = '';
+                unitCostField.value = '';
+                totalAmountField.value = '';
+
+                // Hide the modal
+                $('#itemModal').modal('hide');
+            });
+
+            // Remove item from the table
+            itemsTableBody.addEventListener('click', function (e) {
+                if (e.target && e.target.classList.contains('remove-item')) {
+                    const row = e.target.closest('tr');
+                    row.remove();
+                }
+            });
+
+            // Validate the form before submission
+            form.addEventListener("submit", function (event) {
+                console.log("Hidden Inputs:", hiddenInputsDiv.innerHTML);
+                if (hiddenInputsDiv.children.length === 0) {
+                    event.preventDefault();
+                    alert("Please add at least one item.");
+                }
+            });
+        });
+    </script>
+}
