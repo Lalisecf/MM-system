@@ -1,0 +1,91 @@
+﻿@model SharedLayer.Models.Inventory.tblApprover
+@{
+    ViewBag.Title = "Approver Management";
+    Layout = "~/Views/Shared/_BestLayout.cshtml";
+}
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div id="MainMenu">
+            <ul class="nav">
+                <li>
+                    <a href="javascript:void(0);" onclick="Sender('New')">New</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" onclick="Sender('Save')">Save</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" onclick="Sender('Delete')">Delete</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" onclick="Sender('Reload')">Reload</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3>Approver Selected</h3>
+        <div class="form-group">
+            <label for="appIdDropDownList">Approver</label>
+            <select id="appIdDropDownList" class="form-control">
+                @*@foreach (var approver in Model.tbla)
+                {
+                    <option value="@approver.AppId">@approver.ApproverFullName</option>
+                }*@
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="userIdDropDownList">UserId</label>
+            <select id="userIdDropDownList" class="form-control">
+                @*@foreach (var user in Model.Users)
+                {
+                    <option value="@user.UserId">@user.UserName</option>
+                }*@
+            </select>
+        </div>
+    </div>
+</div>
+
+@* Requesters Section *@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div id="RequestersTab">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#requestersToApproveTab" data-toggle="tab">Requesters To Be Approved</a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="requestersToApproveTab" class="tab-pane active">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Requester</th>
+                                <th>AppId</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @*@foreach (var requester in Model.Requesters)
+                            {
+                                <tr>
+                                    <td>@requester.ReqFullName</td>
+                                    <td>@requester.AppId</td>
+                                    <td>
+                                        <button class="btn btn-primary" onclick="AddRequester(@requester.ReqId)">Add</button>
+                                        <button class="btn btn-danger" onclick="RemoveRequester(@requester.ReqId)">Remove</button>
+                                    </td>
+                                </tr>
+                            }*@
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
