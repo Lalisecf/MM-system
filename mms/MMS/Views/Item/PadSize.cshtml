@@ -1,0 +1,91 @@
+﻿@model IEnumerable<MMS.Models.Inventory.ItemMasterVM>
+
+@{
+    ViewBag.Title = "Items";
+    Layout = "~/Views/Shared/_BestLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">       
+    </div>
+    <div class="card-body table-border-style">
+        <div class="table-responsive">
+            <table class="table table-hover" id="commondata">
+                <thead>
+                    <tr>
+                        <th>Product Code</th>
+                        <th>Description</th>
+                        <th>Pad Size</th>
+                        <th>Product Group</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ProdCode</td>
+                            <td>@item.ProdDesc</td>
+                            <td>@item.NoPerPad</td>
+                            <td>@item.ProductGroup</td>                           
+                            <td>
+                                <button type="button" class="btn btn-outline-primary fa fa-edit" data-toggle="modal" data-target="#editPadSizeModal" data-prodcode="@item.ProdCode">
+                                    Edit
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Edit Item Modal -->
+    <div class="modal fade" id="editPadSizeModal" tabindex="-1" role="dialog" aria-labelledby="editPadSizeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content card-style">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editPadSizeModalLabel">Edit Item</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Content loaded via JS for Edit Item Form -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const editButtons = document.querySelectorAll('button[data-toggle="modal"][data-target="#editPadSizeModal"]');
+    editButtons.forEach(button => {
+        button.addEventListener("click", async function () {
+            const prodCode = this.getAttribute('data-prodcode');
+            if (!prodCode) {
+                alert('Invalid Product Code');
+                return;
+            }
+            try {
+                const response = await fetch(`@Url.Action("EditPadSize", "Item")?id=${prodCode}`, {
+                    method: 'GET',
+                });
+                if (response.ok) {
+                    const modalContent = await response.text();
+                    document.querySelector('#editPadSizeModal .modal-body').innerHTML = modalContent;
+                } else {
+                    alert('Failed to load the form. Please try again.');
+                }
+            } catch (error) {
+                console.error("Error loading Edit PadSize modal:", error);
+                alert('An error occurred while loading the form.');
+            }
+        });
+    });
+});
+
+    </script>
+}

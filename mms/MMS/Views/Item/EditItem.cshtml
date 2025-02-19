@@ -1,0 +1,139 @@
+﻿@model MMS.Models.Inventory.ItemMasterVM
+
+@{
+    ViewBag.Title = " Item Edit ";
+    Layout = "~/Views/Shared/_BestLayout.cshtml";
+
+    string ProdCode = Model.ProdCode;
+
+}
+<div class="card">
+    <div class="card-header">
+
+        <form action="/Item/EditItem" method="post" class="d-inline">
+            <input type="hidden" name="ProdCode" value="@ProdCode" />
+
+
+            <div class="card-body table-border-style">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CategoryType, "Category Description")
+                            @Html.DropDownList("Category", ViewBag.Category as SelectList, "-- Select Category --", new { @class = "form-control select2", @required = "required", @id = "Category" })
+                            @Html.ValidationMessageFor(model => model.CategoryType, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+
+                            @Html.LabelFor(model => model.MainPG, "MainPG Description")
+                            @Html.DropDownList("MainPG", ViewBag.MainCategory as SelectList, "-- Select MainPG --", new { @class = "form-control select2", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.MainPG, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item Code and Description -->
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="ProdCode">Item Code</label>
+                            @Html.TextBoxFor(model => model.ProdCode,
+                                new { @class = "form-control", @placeholder = "Enter Item Code", @required = "required", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.ProdCode, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="ProdDesc">Item Description</label>
+                            @Html.TextBoxFor(model => model.ProdDesc,
+                                new { @class = "form-control", @placeholder = "Enter Item Description", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.ProdDesc, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="Maximumlevel">Item Maximumlevel</label>
+                            @Html.TextBoxFor(model => model.Maximumlevel,
+                                new { @class = "form-control", @placeholder = "Enter Item Maximumlevel", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.Maximumlevel, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="MinimumLevel">Item MinimumLevel</label>
+                            @Html.TextBoxFor(model => model.MinimumLevel,
+                                new { @class = "form-control", @placeholder = "Enter Item MinimumLevel", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.MinimumLevel, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.UnitMeas, "UnitMeas Description")
+                            @Html.DropDownListFor(model => model.UnitMeas,
+                                ViewBag.unitMeas as SelectList,
+                                "-- Select UnitMeas --",
+                                new { @class = "form-control", @required = "required" })
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OldMainPG, "OldMainPG")
+                            @Html.DropDownListFor(model => model.OldMainPG,
+                                ViewBag.OldMainPG as SelectList,
+                                "-- Select OldMainPG --",
+                                new { @class = "form-control select2", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.OldMainPG, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="ReorderLevel">Item ReorderLevel</label>
+                            @Html.TextBoxFor(model => model.ReorderLevel,
+                                new { @class = "form-control", @placeholder = "Enter Item ReorderLevel", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.ReorderLevel, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group form-check">
+                            @Html.CheckBoxFor(model => model.IsItemObsulte,
+                                new { @class = "form-check-input", @id = "IsItemObsulte" })
+                            <label class="form-check-label" for="IsItemObsulte">Is Active</label>
+                            @Html.ValidationMessageFor(model => model.IsItemObsulte, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="TagCode">Item TagCode</label>
+                            @Html.TextBoxFor(model => model.TagCode,
+                                new { @class = "form-control", @placeholder = "Enter Item TagCode" })
+                            @Html.ValidationMessageFor(model => model.TagCode, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <button type="submit" class="fa fa-check-circle btn btn-primary"><i> Edit Item</i></button>
+                <h6 style="text-align:right;margin-left:85%;color:coral!important">@ProdCode </h6>
+</form>
+
+    </div>
+
+
+
+</div>
+

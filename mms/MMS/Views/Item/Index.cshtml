@@ -1,0 +1,149 @@
+﻿@model IEnumerable<MMS.Models.Inventory.ItemMasterVM>
+
+@{
+    ViewBag.Title = "Item";
+    Layout = "~/Views/Shared/_BestLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="form-group">
+            <a class="btn btn-outline-primary fa fa-user-plus btn-large" href="/Item/AddItem"> Add Item</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header card-header-bold" style="font-weight:bold;background-color:lightgrey">
+            <form method="get" action="@Url.Action("Index")">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="Item">ITEM</label>
+                    </div>
+                    <select id="Item" name="selectedItem" class="form-control select2" required onchange="this.form.submit()">
+                        <option value="">-- Select Item --</option>
+                        @foreach (var item in ViewBag.Items as SelectList)
+                        {
+                            <option value="@item.Value" @(item.Value == Request.QueryString["selectedItem"] ? "selected" : "")>
+                                @item.Text
+                            </option>
+                        }
+                    </select>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <div class="card-body table-border-style">
+        <div class="table-responsive">
+            <table class="table table-hover" id="items2">
+                <thead>
+                    <tr>
+                        <th>Cat Code</th>
+                        <th>Category</th>
+                        <th>Product Code</th>
+                        <th>Tag Code</th>
+                        <th>Description</th>
+                        <th>Product Group</th>
+                        <th>Obsolete</th>
+                        <th>Max Level</th>
+                        <th>Min Level</th>
+                        <th>Reorder Level</th>
+                        <th>Unit Measure</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.MainPG</td>
+                            <td>@item.CatDesc</td>
+                            <td>@item.ProdCode</td>
+                            <td>@item.TagCode</td>
+                            <td>@item.ProdDesc</td>
+                            <td>@item.ProductGroup</td>
+                            <td>
+                                <input type="checkbox" disabled @(item.IsItemObsulte ? "" : "checked") class="status-checkbox" />
+                            </td>
+                            <td>@item.Maximumlevel</td>
+                            <td>@item.MinimumLevel</td>
+                            <td>@item.ReorderLevel</td>
+                            <td>@item.UnitMeas</td>
+
+                            <td>
+                                @Html.ActionLink("Edit", "EditItem", "Item", new { ProdCode = @item.ProdCode }, new { @class = "btn btn-outline-primary fa fa-edit" })
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Edit Item Modal -->
+    <div class="modal fade" id="editItemModal" tabindex="-1" role="dialog" aria-labelledby="editItemModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content card-style">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editItemModalLabel">Edit Item</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        @section Scripts {
+            <script>
+
+            const editItemButton = document.querySelectorAll('button[data-toggle="modal"][data-target="#editItemModal"]');
+            editItemButton.forEach(button => {
+                button.addEventListener("click", async function () {
+                    const prodCode = this.getAttribute('data-id');
+                    if (!prodCode) {
+                        alert('Invalid Product Code');
+                        return;
+                    }
+                    try {
+                        const response = await fetch(`@Url.Action("Edit", "Item")/${prodCode}`, {
+                            method: 'GET',
+                        });
+                        if (response.ok) {
+                            const modalContent = await response.text();
+                            document.querySelector('#editItemModal .modal-body').innerHTML = modalContent;
+                        } else {
+                            alert('Failed to load the form. Please try again.');
+                        }
+                    } catch (error) {
+                        console.error("Error loading Edit Item modal:", error);
+                        alert('An error occurred while loading the form.');
+                    }
+                });
+            });
+            </script>
+        }
+
+
+        <style>
+            input[type="checkbox"]:checked {
+                background-color: blue;
+                border-color: blue;
+
+            }
+
+            input[type="checkbox"]:not(:checked) {
+                background-color: lightgray !important;
+                border-color: lightgray !important;
+            }
+
+            input[type="checkbox"]:disabled {
+                cursor: not-allowed;
+            }
+        </style>

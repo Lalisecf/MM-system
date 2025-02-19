@@ -1,0 +1,149 @@
+﻿@model MMS.Models.Inventory.ItemMasterVM
+
+
+@{
+    Layout = "~/Views/Shared/_BestLayout.cshtml";
+}
+@using (Html.BeginForm("AddItem", "Item", FormMethod.Post))
+
+{
+    @Html.AntiForgeryToken()
+
+    <div class="card">
+        <div class="card-header">
+            <h5>Item</h5>
+        </div>
+        <div class="card-body table-border-style">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Category">Category</label>
+                        <select id="Category" name="Category" class="form-control" required>
+                            <option value="">-- Select Category --</option>
+                            @foreach (var item in ViewBag.Category as SelectList)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="MainPG">Main Category</label>
+                        <select id="MainPG" name="MainPG" class="form-control select2" required>
+                            <option value="">-- Select Main Category --</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ProdDesc, "Item Description")
+                        @Html.TextBoxFor(model => model.ProdDesc,
+                            new { @class = "form-control", @id = "ProdDesc", @required = "required", @placeholder = "Enter Item Description" })
+                        @Html.ValidationMessageFor(model => model.ProdDesc, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ReorderLevel, "Item ReorderLevel")
+                        @Html.TextBoxFor(model => model.ReorderLevel,
+                            new { @class = "form-control", @id = "ReorderLevel", @required = "required", @placeholder = "Enter Item ReorderLevel" })
+                        @Html.ValidationMessageFor(model => model.ReorderLevel, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Maximumlevel, "Item Maximumlevel")
+                        @Html.TextBoxFor(model => model.Maximumlevel,
+                            new { @class = "form-control", @id = "Maximumlevel", @required = "required", @placeholder = "Enter Item Maximumlevel" })
+                        @Html.ValidationMessageFor(model => model.Maximumlevel, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MinimumLevel, "Item MinimumLevel")
+                        @Html.TextBoxFor(model => model.MinimumLevel,
+                            new { @class = "form-control", @id = "MinimumLevel", @required = "required", @placeholder = "Enter Item MinimumLevel" })
+                        @Html.ValidationMessageFor(model => model.MinimumLevel, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group form-check">
+                        @Html.CheckBoxFor(model => model.IsItemObsulte, new { @class = "form-check-input", @id = "isActive" })
+                        <label class="form-check-label" for="IsItemObsulte">IsItemObsulte</label>
+                        @Html.ValidationMessageFor(model => model.IsItemObsulte, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TagCode, "Item TagCode")
+                        @Html.TextBoxFor(model => model.TagCode,
+                            new { @class = "form-control", @id = "TagCode", @required = "required", @placeholder = "Enter Item TagCode" })
+                        @Html.ValidationMessageFor(model => model.TagCode, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Unit Measure">Unit Measure</label>
+                        <select id="UnitMeas" name="UnitMeas" class="form-control select2" required>
+                            <option value="">-- Select Unit Measure --</option>
+                            @foreach (var um in ViewBag.UnitMeas as SelectList)
+                            {
+                                <option value="@um.Value">@um.Text</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="OldMainPG">OldMainPG</label>
+                        <select id="OldMainPG" name="OldMainPG" class="form-control" required>
+                            <option value="">-- Select OldMainPG --</option>
+                            @foreach (var oldMainPG in ViewBag.OldMainPG as SelectList)
+                            {
+                                <option value="@oldMainPG.Value">@oldMainPG.Text</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group form-check">
+                        @Html.CheckBoxFor(model => model.IsItemObsulte, new { @class = "form-check-input", @id = "isActive" })
+                        <label class="form-check-label" for="IsItemObsulte">IsItemObsulte</label>
+                        @Html.ValidationMessageFor(model => model.IsItemObsulte, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-outline-primary">Save</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+
+

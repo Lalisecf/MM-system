@@ -1,0 +1,34 @@
+﻿@model MMS.Models.Inventory.ItemMasterVM
+
+@using (Html.BeginForm("EditPadSize", "Item", FormMethod.Post, new { @id = "editPadSizeForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ProdCode)
+
+    <div class="container">
+
+        <div class="row">
+            <div class="form-group">
+                <label for="NoPerPad">Pad Size</label>
+                @Html.TextBoxFor(model => model.NoPerPad,
+                    new { @class = "form-control", @placeholder = "Enter PadSize", @required = "required" })
+                @Html.ValidationMessageFor(model => model.NoPerPad, null, new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="CatDesc">ProdCode</label>
+                @Html.TextBoxFor(model => model.ProdCode,
+                    new { @class = "form-control", @placeholder = "Enter ProdCode", @required = "required", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.ProdCode, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-5">
+                <label for="CatDesc">Item Description</label>
+                @Html.TextBoxFor(model => model.ProdDesc,
+                    new { @class = "form-control", @placeholder = "Enter Description", @required = "required", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.ProdDesc, null, new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary">Save</button>
+    </div>
+}
