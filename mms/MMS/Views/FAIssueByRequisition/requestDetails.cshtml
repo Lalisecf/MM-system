@@ -1,0 +1,280 @@
+﻿@model IEnumerable<MMS.Models.Inventory.RquestDetailVM>
+
+@{
+    ViewBag.Title = "Transaction Details";
+    Layout = "~/Views/Shared/_BestLayout.cshtml";
+    string ReqNo = ViewBag.ReqNo as string;
+}
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between bg-light text-white">
+        <h6 class="text-left">Transaction Details</h6>
+        <h6 class="text-right">Req No: @ReqNo</h6>
+    </div>
+    <div class="card-body table-border-style">
+        <div class="table-responsive">
+            <table class="table table-hover" id="example2">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Item</th>
+                        <th>Qty On Hand</th>
+                        <th>Qty Issued</th>
+                        <th>Qty Approved</th>
+                        <th>UnitCost</th>
+                        <th>Status</th>
+                        <th>Issue From </th>
+                       
+                     
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model == null || !Model.Any())
+                    {
+                        <tr>
+                            <td colspan="7" class="text-center text-muted">No request details found.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var request in Model)
+                        {
+                            <tr>
+                                <td>@(string.IsNullOrWhiteSpace(request.ProdDesc) ? "-" : request.ProdDesc)</td>
+                                <td>@request.QtyOnHand</td>
+                                <td>@request.QtyIssued</td>
+                                <td>@request.QtyReq</td>
+                                <td>@request.UnitCost</td>
+                                <td>@request.Status</td>
+                                <td>
+                                    @if (request.trandt != null && request.trandt.Any())
+                                    {
+                                        <form class="d-inline-flex align-items-center issue-form" style="margin-top:-10px">
+                                            <div class="form-group row">
+                                                <div class="col-md-6">
+                                                    <select class="form-control grv-select select2" name="grv" required
+                                                            data-toggle="tooltip" data-placement="top" title="Select Issue from">
+                                                        <option value="" disabled selected>Select GRV</option>
+
+                                                        @foreach (var grv in request.trandt)
+                                                        {
+                                                            <option value="@grv.RefNo">
+                                                                @grv.RefNo, UnitCost: @grv.UnitCost, Qty: @grv.Qty,
+                                                                Qty Issued: @grv.QtyIssued)
+                                                            </option>
+                                                        }
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <input type="number" name="QtyToIssue" class="form-control qty-to-issue"
+                                                           min="1" max="@request.QtyReq" required
+                                                           data-toggle="tooltip" data-placement="top"
+                                                           title="Enter the quantity you wish to issue" placeholder="Qty issue">
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="idNo" value="@request.IdNo" class="form-control req-detail-idno" />
+                                            <input type="hidden" name="prodCode" value="@request.ProdCode" class="form-control req-detail-prodCode" />
+                                            <input type="hidden" name="ProdDesc" value="@request.ProdDesc" class="form-control req-detail-ProdDesc" />
+                                            <input type="hidden" name="QtyReq" value="@request.QtyReq" class="form-control req-detail-QtyReq" />
+                                            <input type="hidden" name="ReqNo" value="@ReqNo" class="form-control req-detail-ReqNo" />
+                                            <input type="hidden" name="unitCost" value="@request.UnitCost" class="form-control req-detail-UnitCost" />
+                                            <button type="submit" class="btn btn-primary fa fa-save issue-btn"> </button>
+                                        </form>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div id="message-container" style="display: none;" class="alert alert-danger"></div>
+        <div id="error-message-container" class="alert alert-danger" style="display: none;">
+            This Item has already been Selected, please check it below list .
+        </div>
+        <div id="message-qty-required" class="alert alert-danger" style="display: none;">
+            Quantity to be issued is required!
+        </div>
+        <div class="card mt-4" id="selected-items-card" style="display: none;">
+            <div class="card-header bg-light text-white d-flex justify-content-between">
+                <h4>Selected Item for Issue</h4>
+                <div>
+                    <label for="autoPrintCheckbox" class="text-primary">Auto Print</label>
+                    <input type="checkbox" id="autoPrintCheckbox" />
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="issuedItemsTable">
+                        <thead class="thead-light" style="display: none;">
+                            <tr>
+                                <th>Item</th>
+                                <th>ProdCode</th>
+                                <th>Quantity to Issue</th>
+                                <th>RefNo</th>
+                                <th>UnitCost</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card-footer d-flex justify-content-between">
+        <button id="finished-btn" class="btn btn-success" style="display: none;">Finish</button>
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-outline-secondary" })
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const issuedItemsTable = document.getElementById('issuedItemsTable').getElementsByTagName('tbody')[0];
+        const selectedItemsCard = document.getElementById('selected-items-card');
+        const finishedBtn = document.getElementById('finished-btn');
+        const errorMessageContainer = document.getElementById('error-message-container');
+
+        document.querySelectorAll('.issue-btn').forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                const form = event.target.closest('form');
+                const grvSelect = form.querySelector('.grv-select');
+                const qtyToIssueInput = form.querySelector('.qty-to-issue');
+                const messageContainer = document.getElementById('message-container');
+                messageContainer.style.display = 'none';
+                const errorMessageQtyRequired = document.getElementById('message-qty-required');
+                errorMessageQtyRequired.style.display = 'none';
+
+                const qtyToIssue = qtyToIssueInput.value;
+                const grvValue = grvSelect.value;
+
+                if (!grvValue || !qtyToIssue || qtyToIssue <= 0) {
+                    errorMessageQtyRequired.textContent = 'Both GRV and Quantity to be issue are required!';
+                    errorMessageQtyRequired.style.display = 'block';
+                    return;
+                }
+
+                const qtyApproved = parseInt(form.querySelector('input[name="QtyReq"]').value);
+                if (parseInt(qtyToIssue) > qtyApproved) {
+                    messageContainer.textContent = 'Quantity to be issued cannot exceed the approved quantity.';
+                    messageContainer.style.display = 'block';
+                    return;
+                }
+
+                const prodDesc = form.querySelector('.req-detail-ProdDesc').value;
+                const prodCode = form.querySelector('.req-detail-prodCode').value;
+                const unitCost = form.querySelector('.req-detail-UnitCost').value;
+                const grvRefNo = grvSelect.value;
+
+                let isDuplicate = false;
+                for (let i = 0; i < issuedItemsTable.rows.length; i++) {
+                    if (issuedItemsTable.rows[i].cells[1].textContent === prodCode) {
+                        isDuplicate = true;
+                        break;
+                    }
+                }
+
+                if (isDuplicate) {
+                    errorMessageContainer.style.display = 'block';
+                    return;
+                }
+
+                errorMessageContainer.style.display = 'none';
+
+                const newRow = issuedItemsTable.insertRow();
+                newRow.insertCell(0).textContent = prodDesc;
+                newRow.insertCell(1).textContent = prodCode;
+                newRow.insertCell(2).textContent = qtyToIssue;
+                newRow.insertCell(3).textContent = grvRefNo;
+                newRow.insertCell(4).textContent = unitCost;
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.classList.add('btn', 'btn-outline-danger', 'btn-sm');
+
+                deleteButton.addEventListener('click', function () {
+                    newRow.remove();
+                    toggleFinishButton();
+                    toggleHeaderVisibility();
+                });
+
+                newRow.insertCell(5).appendChild(deleteButton);
+
+                qtyToIssueInput.value = '';
+                grvSelect.selectedIndex = -1;
+                toggleHeaderVisibility();
+                toggleFinishButton();
+            });
+        });
+
+        function toggleHeaderVisibility() {
+            if (issuedItemsTable.rows.length > 0) {
+                document.querySelector('#issuedItemsTable thead').style.display = '';
+                selectedItemsCard.style.display = 'block';
+            } else {
+                document.querySelector('#issuedItemsTable thead').style.display = 'none';
+                selectedItemsCard.style.display = 'none';
+            }
+        }
+
+        function toggleFinishButton() {
+            if (issuedItemsTable.rows.length > 0) {
+                finishedBtn.style.display = 'block';
+            } else {
+                finishedBtn.style.display = 'none';
+            }
+        }
+
+        finishedBtn.addEventListener('click', function () {
+            const issuedItems = [];
+            Array.from(issuedItemsTable.rows).forEach(function (row) {
+                const itemName = row.cells[0].textContent;
+                const prodCode = row.cells[1].textContent;
+                const qtyToIssue = row.cells[2].textContent;
+                const grvRefNo = row.cells[3].textContent;
+                const unitCost = row.cells[4].textContent;
+
+                issuedItems.push({
+                    ItemName: itemName,
+                    prodCode: prodCode,
+                    QtyToIssue: qtyToIssue,
+                    GRVRefNo: grvRefNo,
+                    UnitCost: unitCost
+                });
+            });
+
+            if (issuedItems.length === 0) {
+                alert("No items to finish!");
+                return;
+            }
+
+            fetch('@Url.Action("IssueFrom", "FAIssueByRequisition")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ issuedItems: issuedItems, ReqNo: '@ReqNo' })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Request finished successfully!');
+                } else {
+                    alert('An error occurred while finishing the request.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while finishing the request.');
+            });
+        });
+
+        toggleHeaderVisibility();
+        toggleFinishButton();
+    });
+</script>
