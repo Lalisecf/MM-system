@@ -1,0 +1,135 @@
+﻿@model MMS.Models.LoginViewModells
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<style>
+    body {
+        background-color: #f0f2f5;
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+        padding: 20px;
+        width: 100%;
+    }
+
+    .login-card {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    .logo-container {
+        margin-bottom: 20px;
+    }
+
+    .logo {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .system-title {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #F69139;
+        margin-bottom: 25px;
+    }
+
+    .input-group {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 1rem;
+        border: 1px solid #ddd;
+        width: 100%;
+    }
+
+    .login-button {
+        width: 100%;
+        padding: 12px;
+        background-color: #0277bd;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .login-button:hover {
+            background-color: #F69139;
+        }
+
+    .footer {
+        text-align: center;
+        margin-top: 20px;
+        color: #555;
+        font-size: 0.9rem;
+    }
+
+        .footer p {
+            color: #F69139;
+        }
+</style>
+
+@using (Html.BeginForm("Login", "Login"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo-container">
+                <img src="~/Img/imageedit_4_4535748408.png" alt="Material Management System Logo" class="logo" />
+            </div>
+
+            <h2 class="system-title">MMS</h2>
+            <div class="card-body">
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @maxlength = 20, @placeholder = "Enter Username", required = "required", autocomplete = "username" })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+                <div class="input-group">
+                    <input class="form-control"
+                           id="Password"
+                           maxlength="30"
+                           name="Password"
+                           placeholder="Enter Password"
+                           required="required"
+                           type="password"
+                           autocomplete="current-password">
+
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="input-group">
+                    <button id="Submit1" class="login-button" type="submit">
+                        <i class="fa fa-sign-in-alt"></i> Login
+                    </button>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>© @DateTime.Now.Year Awash Bank. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,42 @@
+﻿@model MMS_Inventory.ViewModels.LoginViewModells
+@using CaptchaMvc.HtmlHelpers
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="login-panel">
+        @if (ViewBag.errormessage != null)
+        {
+            <p class="alert alert-danger" id="successMessage">@ViewBag.errormessage</p>
+        }
+
+        <div class="form-group">
+            <div class="col-md-12 col-xs-12">
+            </div>
+        </div>
+        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+       
+        <div class="form-group">
+
+            <div class="col-md-12 col-xs-12">
+                <h4>Enter Your Username </h4>
+                @Html.TextBoxFor(model => model.Username, new { @class = "form-control", @maxlength = 20, @autocomplete = "off", @Placeholder = "Enter Your Username" })
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-0 col-md-10 form-group">
+                <input type="submit" value="Send Verification Code via SMS" name="submitButton" class="action-button"  style="color:blue"/>
+            </div>
+            <div class="col-md-offset-0 col-md-10 form-group">
+                <input type="submit" value="Send Verification Code via Email" name="submitButton" class="action-button"style="color:blue" />              
+            </div>
+        </div>
+    </div>
+}

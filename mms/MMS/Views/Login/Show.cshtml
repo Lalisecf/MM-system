@@ -1,0 +1,59 @@
+﻿@model MMS_Inventory.ViewModels.LoginViewModell
+@using CaptchaMvc.HtmlHelpers
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+@*<style>
+        #CaptchaInputText {
+            text-transform: uppercase;
+        }
+    </style>*@
+@using (Html.BeginForm("GetNumericOTP", "Login"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="login-panel" style="width:auto">
+        <div class="form-group" style="width:auto">
+            <div class="col-md-12 col-xs-12" style="width:auto">
+                <h4>Click on button to Generate Numeric OTP :</h4>
+            </div>
+        </div>
+        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+        <div class="col-md-6" style="width:300px">
+            <div class="col-md-offset-0 col-md-10">
+                <h4><label>Insert User Id </label> </h4> 
+                @Html.TextBoxFor(model => model.Username, new { @class = "form-control", @maxlength = 20, @autocomplete = "off" })
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                @*@Html.ActionLink("Generate OTP", "Show")*@
+                @*<a href="~/Login/GetNumericOTP/" data-toggle="modal"><span class="btn btn-success">Generate OTP</span></a>*@
+                <input id="Submit1" class="btn btn-success" type="submit" value="Generate OTP">
+                @*<a href="~/Login/GetNumericOTP" data-toggle="modal"><span class="btn btn-success">Reset Password</span></a>*@
+            </div>
+        </div>
+    </div>
+}
+<br /><br /><br /><br />
+@using (Html.BeginForm("ResetPassword", "Login"))
+{
+<div class="login-panel" style="width:auto">
+    <div class="form-group">
+        <div class="col-md-12 col-xs-12">
+            @*@Html.LabelFor(model => model.Username)*@
+            <h4><label>Insert Generated OTP From Your mobile</label></h4>
+            @Html.TextBoxFor(model => model.Username, new { @class = "form-control", @maxlength = 20, @autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-md-6" style="width:300px">
+        <div class="col-md-offset-0 col-md-10">
+            @*@Html.ActionLink("Generate OTP", "Show")*@
+            @*<a href="~/Login/GetNumericOTP/" data-toggle="modal"><span class="btn btn-success">Reset Password</span></a>*@
+            <input id="Submit" class="btn btn-success" type="submit" value="Reset Password">
+        </div>
+    </div>
+</div>
+}
+   
+
