@@ -3,12 +3,10 @@ using System.Web.Security;
 using static MMS.FilterConfig;
 namespace MMS.Controllers
 {
-    //[SessionTimeout]
-    //[SingleDeviceLogin]
+    [SessionTimeout]
+    [SingleDeviceLogin]
     public class HomeController : Controller
     {
-        //IMstUserServvie _userRepository;
-        //HomeService _HomeService = new HomeService();
 
         public ActionResult Indexk()
         {

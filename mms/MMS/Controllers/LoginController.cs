@@ -8,64 +8,73 @@ using System.Threading.Tasks;
 using System.Linq;
 using SharedLayer.AB_Common;
 using SharedLayer.Models;
-using DataAccessLayer;
 using System.Data.Entity;
 using MMS.Models;
-
+using BusinessLayer.Interfaces;
 
 namespace MMS.Controllers
 {
-
     public class LoginController : Controller
     {
-        private IMstUserRepository _iMstUser;
-        private IMstUserRoleRepository _savedUserRoles;
+        private IMstUserService _userService;
+        private IMstUserRoleService _userRoleService;
+        private IRoleService _roleService;
+        private IDepartmentService _departmentService;
+        private IUserBranchService _userBranchService;
         SystemTools objSystemTools = new SystemTools();
         private MasterDataContext db = new MasterDataContext();
         API pl = new API();
 
         private string ConnectionString
         {
-
             get
             {
                 return ConfigurationManager.ConnectionStrings["MasterDBConnectionString"].ConnectionString;
             }
         }
 
-        public LoginController(IMstUserRepository MstUser, IMstUserRoleRepository savedAssignedRoles)
+        public LoginController(IMstUserService MstUser,
+            IMstUserRoleService savedAssignedRoles,
+            IUserBranchService userBranchService,
+            IRoleService roleService,
+            IDepartmentService departmentService)
         {
-            _iMstUser = MstUser;
-            _savedUserRoles = savedAssignedRoles;
+            _userService = MstUser;
+            _userRoleService = savedAssignedRoles;
+            _userBranchService = userBranchService;
+            _roleService = roleService;
+            _departmentService = departmentService;
         }
 
         public ActionResult Login()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<ActionResult> Login(LoginViewModells loginViewModel)
         {
-            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-
             try
             {
                 if (!db.Database.Exists())
                 {
                     Log.Error("Database Not Exists");
                     ModelState.AddModelError("", "Please Contact System Admin");
+                    TempData["Error"] = "Network Error";
                     return View(loginViewModel);
                 }
 
                 Session["UserName"] = loginViewModel.UserName;
-                var userExists = await _iMstUser.UserNameExistsAsync(loginViewModel.UserName);
+                var userExists = await _userService.UserExistsAsync(loginViewModel.UserName);
                 if (!userExists)
                 {
+                    Log.Error("Invalid Credentials");
                     ModelState.AddModelError("", "Invalid Credentials");
                     return View(loginViewModel);
                 }
 
-                var usermasterModel = _iMstUser.GetByUsername(loginViewModel.UserName);
+                var usermasterModel = await _userService.GetUserByUsernameAsync(loginViewModel.UserName);
+                var userroleModel = await _userRoleService.GetAssignedRolesByUserIdAsync(usermasterModel.UserId);
 
                 if (await IsUserLockedOut(usermasterModel.UserName))
                 {
@@ -73,25 +82,13 @@ namespace MMS.Controllers
                     return View(loginViewModel);
                 }
 
-                if (!AuthenticateUserWithAD(loginViewModel.UserName, loginViewModel.Password, loginViewModel))
-                {
-                    return View(loginViewModel);
-                }
-
-                await AssignRoleToUserIfNeeded(usermasterModel.UserId);
-
-                var qq = _iMstUser.UpdateLogin(usermasterModel);
+                await _userService.UpdateLoginAsync(usermasterModel.UserId);
                 pl.ResetFailedAttempts(usermasterModel.UserName);
-                Session["SessionID"] = qq.SessionID;
+                Session["SessionID"] = usermasterModel.SessionID;
+                Session["UserID"] = usermasterModel.UserId;
 
-                await AssignUserRoleToSession(usermasterModel.UserId);
-
-                //if (!HasRolePermission())
-                //{
-                //    ModelState.AddModelError("", "Access Denied!");
-                //    Log.Error($"{Session["UserName"]} Access Denied!");
-                //    return View(loginViewModel);
-                //}
+                await GetAssignedRole(usermasterModel.UserId);
+                await GetAssignedBranch(usermasterModel.UserId);
 
                 Log.Info($"On {DateTime.Now} {Session["UserName"]} logged in from IP {Request.ServerVariables["REMOTE_ADDR"]}");
 
@@ -115,7 +112,7 @@ namespace MMS.Controllers
             catch (Exception ex)
             {
                 pl.IncrementFailedAttempts(loginViewModel.UserName);
-                ModelState.AddModelError("", $"{ex.InnerException?.Message} ({loginViewModel.attempt} trial of 5)");
+                TempData["Error"] = $"{ex.InnerException?.Message} ({loginViewModel.attempt} trial of 5)";
                 Log.Error($"{Session["UserName"]} {ex.InnerException?.Message}");
                 return false;
             }
@@ -141,15 +138,35 @@ namespace MMS.Controllers
             }
         }
 
-        private async Task AssignUserRoleToSession(long userId)
+        private async Task GetAssignedRole(int userId)
         {
-            var assignedRole = await _savedUserRoles.GetAssignedRolesbyUserIdAsync(userId);
-            if (assignedRole != null)
+            var roles = await _userRoleService.GetAssignedRolesByUserIdAsync(userId);
+            if (roles.Any())
             {
-                Session["Role"] = assignedRole.RoleId;
-                int roleId = Convert.ToInt32(Session["Role"]);
-                var role = await db.MstRoles.Where(c => c.RoleID == roleId).Select(c => c.RoleName).SingleOrDefaultAsync();
-                Session["Roleer"] = role;
+                Session["Roles"] = roles.Select(r => r.RoleId).ToList();
+                var roleNames = await _roleService.GetRolesByIdsAsync(roles.Select(r => r.RoleId).ToArray());
+                Session["RoleName"] = string.Join(", ", roleNames.Select(r => r.RoleName));
+            }
+            else
+            {
+                Session["Roles"] = null;
+                Session["RoleName"] = null;
+            }
+        }
+
+        private async Task GetAssignedBranch(int userId)
+        {
+            var branches = await _userBranchService.GetAssignedDeptRightsByUserIdAsync(userId);
+            if (branches.Any())
+            {
+                Session["Branches"] = branches.Select(b => b.DeptCode).ToList();
+                var branchNames = await _departmentService.GetDepartmentsByIdAsync(branches.Select(b => b.DeptCode).ToArray());
+                Session["BranchName"] = string.Join(", ", branchNames.Select(b => b.Name));
+            }
+            else
+            {
+                Session["Branches"] = null;
+                Session["BranchName"] = null;
             }
         }
 
@@ -172,7 +189,6 @@ namespace MMS.Controllers
 
         public ActionResult Show()
         {
-
             return View();
         }
 
@@ -194,9 +210,6 @@ namespace MMS.Controllers
                 Response.Cookies.Add(Cookies);
                 HttpContext.Session.Clear();
                 Session.Abandon();
-
-
-
                 return RedirectToAction("Login", "Login");
             }
             catch (Exception ex)
@@ -205,7 +218,6 @@ namespace MMS.Controllers
                 while (inner.InnerException != null)
                 {
                     inner = inner.InnerException;
-
                 }
                 Log.Error(Session["UserName"].ToString() + " " + inner.Message);
                 throw;
@@ -230,7 +242,6 @@ namespace MMS.Controllers
                 while (inner.InnerException != null)
                 {
                     inner = inner.InnerException;
-
                 }
                 Log.Error(Session["UserName"].ToString() + " " + inner.Message);
                 throw;
@@ -248,6 +259,7 @@ namespace MMS.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult ChangePassword(LoginViewModells model)
         {
@@ -261,53 +273,9 @@ namespace MMS.Controllers
                 while (inner.InnerException != null)
                 {
                     inner = inner.InnerException;
-
                 }
                 Log.Error(Session["UserName"].ToString() + " " + inner.Message);
                 return View("Login");
-            }
-
-        }
-
-
-
-        public bool Update(LoginViewModells objMstUsers)
-        {
-            string ConnectionStringg = ConfigurationManager.ConnectionStrings["MasterDataClassesDataContext"].ConnectionString;
-            SqlConnection connection = new SqlConnection(ConnectionStringg);
-            AesAlgorithm aesAlgorithm = new AesAlgorithm();
-
-            string strUpdate = @"update [PasswordMaster]   SET Password = @Password
-                                from MstUser as AA where [PasswordMaster].MstUserId = AA.MstUserId AND [PasswordMaster].MstUserId=@MstUserID ";
-
-
-            SqlCommand command = new SqlCommand() { CommandText = strUpdate, CommandType = CommandType.Text };
-            command.Connection = connection;
-
-            try
-            {
-                command.Parameters.Add(new SqlParameter("@UserID", objMstUsers.UserId));
-                command.Parameters.Add(new SqlParameter("@Password", aesAlgorithm.EncryptString(objMstUsers.Password)));
-
-                connection.Open();
-                int _rowsAffected = command.ExecuteNonQuery();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Exception inner = ex.InnerException ?? ex;
-                while (inner.InnerException != null)
-                {
-                    inner = inner.InnerException;
-
-                }
-                Log.Error(Session["UserName"].ToString() + " " + inner.Message);
-                throw new Exception("MstUsers::Update::Error!" + ex.Message, ex);
-            }
-            finally
-            {
-                connection.Close();
-                command.Dispose();
             }
         }
 
@@ -316,18 +284,12 @@ namespace MMS.Controllers
         {
             return View();
         }
+
         private async Task<bool> IsUserLockedOut(string username)
         {
             var usr = await db.MstUsers.FirstOrDefaultAsync(x => x.UserName == username);
-            if (usr.attempt <= 4)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-
+            return usr.Attempt > 4;
         }
     }
 }
+

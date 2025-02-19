@@ -1,22 +1,18 @@
-﻿using DataAccessLayer;
-using SharedLayer.AB_Common;
+﻿using BusinessLayer;
 using SharedLayer.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using System.Web.Mvc.Html;
-using static MMS.FilterConfig;
 
 namespace MMS.Controllers
 {
-    [SessionTimeout]
-    [SingleDeviceLogin]
+    //[SessionTimeout]
+    //[SingleDeviceLogin]
     public class DashboardController : Controller
     {
-        private readonly IMstMenuDefWebRepository _menuRepository;
+        private readonly IMstMenuDefWebService _menuRepository;
 
-        public DashboardController(IMstMenuDefWebRepository menuRepository)
+        public DashboardController(IMstMenuDefWebService menuRepository)
         {
             _menuRepository = menuRepository;
         }
