@@ -1,0 +1,337 @@
+D:\Developed SW\Inventory\new-mms\MMS\obj\Debug\MMS.csproj.AssemblyReference.cache
+D:\Developed SW\Inventory\new-mms\MMS\obj\Debug\MMS.csproj.CoreCompileInputs.cache
+D:\Developed SW\Inventory\new-mms\MMS\bin\MMS.dll.config
+D:\Developed SW\Inventory\new-mms\MMS\bin\MMS.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\MMS.pdb
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\csc.exe
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\csc.exe.config
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\csc.rsp
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\csi.exe
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\csi.exe.config
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\csi.rsp
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\Microsoft.Managed.Core.targets
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\Microsoft.Win32.Primitives.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.AppContext.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.Collections.Immutable.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.Console.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.Globalization.Calendars.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.IO.Compression.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.IO.Compression.ZipFile.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.IO.FileSystem.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.Net.Http.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.Net.Sockets.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.Reflection.Metadata.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.Threading.Tasks.Extensions.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.ValueTuple.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.Xml.XmlDocument.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.Xml.XPath.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\vbc.exe
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\vbc.exe.config
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\vbc.rsp
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\VBCSCompiler.exe
+D:\Developed SW\Inventory\new-mms\MMS\bin\roslyn\VBCSCompiler.exe.config
+D:\Developed SW\Inventory\new-mms\MMS\bin\Antlr3.Runtime.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\AutoMapper.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\BusinessLayer.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\DataAccessLayer.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\EntityFramework.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\EntityFramework.SqlServer.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\log4net.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.AspNet.Identity.Core.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Bcl.HashCode.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Caching.Abstractions.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Caching.Memory.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Configuration.Binder.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Configuration.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.DependencyInjection.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Logging.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Options.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Primitives.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Web.Infrastructure.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Newtonsoft.Json.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\SharedLayer.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Buffers.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Collections.Immutable.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.ComponentModel.Annotations.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Diagnostics.DiagnosticSource.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.IO.FileSystem.AccessControl.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Memory.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Numerics.Vectors.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Runtime.CompilerServices.Unsafe.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Security.AccessControl.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Security.Principal.Windows.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Threading.Tasks.Extensions.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.ValueTuple.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Web.Helpers.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Web.Mvc.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Web.Optimization.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Web.Razor.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Web.WebPages.Deployment.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Web.WebPages.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Web.WebPages.Razor.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Unity.Abstractions.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Unity.Container.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Unity.Mvc.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\WebActivatorEx.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\WebGrease.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\Dapper.dll
+D:\Developed SW\Inventory\new-mms\MMS\bin\BusinessLayer.pdb
+D:\Developed SW\Inventory\new-mms\MMS\bin\BusinessLayer.dll.config
+D:\Developed SW\Inventory\new-mms\MMS\bin\DataAccessLayer.pdb
+D:\Developed SW\Inventory\new-mms\MMS\bin\DataAccessLayer.dll.config
+D:\Developed SW\Inventory\new-mms\MMS\bin\SharedLayer.pdb
+D:\Developed SW\Inventory\new-mms\MMS\bin\SharedLayer.dll.config
+D:\Developed SW\Inventory\new-mms\MMS\bin\AutoMapper.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\EntityFramework.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\EntityFramework.SqlServer.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\log4net.pdb
+D:\Developed SW\Inventory\new-mms\MMS\bin\log4net.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.AspNet.Identity.Core.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Bcl.AsyncInterfaces.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Bcl.HashCode.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.EntityFrameworkCore.Abstractions.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Caching.Abstractions.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Caching.Memory.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Configuration.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Configuration.Abstractions.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Configuration.Binder.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.DependencyInjection.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Logging.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Logging.Abstractions.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Options.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Primitives.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Buffers.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Collections.Immutable.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Diagnostics.DiagnosticSource.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.IO.FileSystem.AccessControl.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Memory.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Numerics.Vectors.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Runtime.CompilerServices.Unsafe.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Security.AccessControl.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Security.Principal.Windows.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Threading.Tasks.Extensions.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.ValueTuple.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Web.Helpers.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Web.Mvc.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Web.Razor.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Web.WebPages.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Web.WebPages.Deployment.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Web.WebPages.Razor.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\System.Web.Optimization.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\Newtonsoft.Json.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\Unity.Abstractions.pdb
+D:\Developed SW\Inventory\new-mms\MMS\bin\Unity.Container.pdb
+D:\Developed SW\Inventory\new-mms\MMS\bin\Unity.Mvc.pdb
+D:\Developed SW\Inventory\new-mms\MMS\bin\Unity.Mvc.xml
+D:\Developed SW\Inventory\new-mms\MMS\bin\Antlr3.Runtime.pdb
+D:\Developed SW\Inventory\new-mms\MMS\bin\Dapper.xml
+D:\Developed SW\Inventory\new-mms\MMS\obj\Debug\MMS.csproj.Up2Date
+D:\Developed SW\Inventory\new-mms\MMS\obj\Debug\MMS.dll
+D:\Developed SW\Inventory\new-mms\MMS\obj\Debug\MMS.pdb
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\INVENTORYDataSet.xsc
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\INVENTORYDataSet.xss
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\INVENTORYDataSet.Designer.cs
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\INVENTORYDataSet.xsd
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\MMS.dll.config
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\MMS.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\MMS.pdb
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\csc.exe
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\csc.exe.config
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\csc.rsp
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\csi.exe
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\csi.exe.config
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\csi.rsp
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\Microsoft.Managed.Core.CurrentVersions.targets
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\System.Buffers.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\System.Memory.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\System.Numerics.Vectors.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\vbc.exe
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\vbc.exe.config
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\vbc.rsp
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\VBCSCompiler.exe
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Antlr3.Runtime.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\AutoMapper.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\BusinessLayer.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\DataAccessLayer.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\EntityFramework.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\EntityFramework.SqlServer.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\log4net.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Bcl.HashCode.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Configuration.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Logging.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Options.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Primitives.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.ReportViewer.WebForms.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.SqlServer.Types.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Newtonsoft.Json.Bson.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Newtonsoft.Json.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Pipelines.Sockets.Unofficial.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\SharedLayer.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\StackExchange.Redis.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Buffers.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Collections.Immutable.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.ComponentModel.Annotations.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.IO.FileSystem.AccessControl.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.IO.Pipelines.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Memory.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Net.Http.Formatting.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Numerics.Vectors.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Security.AccessControl.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Security.Principal.Windows.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Threading.Channels.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Threading.Tasks.Extensions.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.ValueTuple.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Web.Helpers.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Web.Http.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Web.Http.WebHost.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Web.Mvc.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Web.Optimization.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Web.Razor.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Web.WebPages.Deployment.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Web.WebPages.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Web.WebPages.Razor.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Unity.Abstractions.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Unity.Container.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Unity.Mvc.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\WebActivatorEx.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\WebGrease.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Dapper.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\BusinessLayer.pdb
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\BusinessLayer.dll.config
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\DataAccessLayer.pdb
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\DataAccessLayer.dll.config
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\SharedLayer.pdb
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\SharedLayer.dll.config
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Antlr3.Runtime.pdb
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\AutoMapper.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\EntityFramework.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\EntityFramework.SqlServer.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\log4net.pdb
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\log4net.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Bcl.HashCode.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.EntityFrameworkCore.Abstractions.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Caching.Abstractions.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Caching.Memory.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Configuration.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Configuration.Abstractions.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Configuration.Binder.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.DependencyInjection.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Logging.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Options.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Microsoft.Extensions.Primitives.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Newtonsoft.Json.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Newtonsoft.Json.Bson.pdb
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Newtonsoft.Json.Bson.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Pipelines.Sockets.Unofficial.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\StackExchange.Redis.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Buffers.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Collections.Immutable.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.IO.FileSystem.AccessControl.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.IO.Pipelines.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Memory.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Net.Http.Formatting.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Numerics.Vectors.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Security.AccessControl.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Security.Principal.Windows.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Threading.Channels.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Threading.Tasks.Extensions.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.ValueTuple.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Web.Helpers.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Web.Http.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Web.Http.WebHost.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Web.Mvc.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Web.Optimization.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Web.Razor.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Web.WebPages.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Web.WebPages.Deployment.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\System.Web.WebPages.Razor.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Unity.Abstractions.pdb
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Unity.Container.pdb
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Unity.Mvc.pdb
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Unity.Mvc.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\Dapper.xml
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\de\Microsoft.SqlServer.Types.resources.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\es\Microsoft.SqlServer.Types.resources.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\fr\Microsoft.SqlServer.Types.resources.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\it\Microsoft.SqlServer.Types.resources.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\ja\Microsoft.SqlServer.Types.resources.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\ko\Microsoft.SqlServer.Types.resources.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\pt\Microsoft.SqlServer.Types.resources.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\ru\Microsoft.SqlServer.Types.resources.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\zh-Hans\Microsoft.SqlServer.Types.resources.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\zh-Hant\Microsoft.SqlServer.Types.resources.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\obj\Debug\MMS.csproj.AssemblyReference.cache
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\obj\Debug\MMS.csproj.CoreCompileInputs.cache
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\obj\Debug\MMS.csproj.Up2Date
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\obj\Debug\MMS.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\obj\Debug\MMS.pdb
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\x86\SqlServerSpatial160.dll
+C:\Users\lalisef\Desktop\Inventory\Inventory\new-mms\MMS\bin\x64\SqlServerSpatial160.dll
