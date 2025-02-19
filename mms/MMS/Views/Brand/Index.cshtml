@@ -1,0 +1,100 @@
+﻿@model IEnumerable<MMS.Models.Inventory.ItemBrandVM>
+
+@{
+    ViewBag.Title = "Brand";
+    Layout = "~/Views/Shared/_BestLayout.cshtml";
+}
+<div class="card">
+    <div class="card-header">
+        <div class="form-group">
+            <a class="btn btn-outline-primary fa fa-user-plus btn-large" href="/Brand/AddBrand"> Add Brand</a>
+        </div>
+    </div>
+
+
+    <div class="card-body table-border-style">
+        <div class="table-responsive">
+            <table class="table table-hover" id="commondata">
+                <thead>
+                    <tr>
+                        <th>Brand No</th>
+                        <th>ProdCode</th>
+                        <th>Item</th>
+                        <th>Brand</th>
+                        <th>Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var brand in Model)
+                    {
+                        <tr>
+                            <td>@brand.ItemBrandId</td>
+                            <td>@brand.MainItem</td>
+                            <td>@brand.ProdDesc</td>
+                            <td>@brand.Brand</td>
+                            <td>@brand.Type</td>
+                            <td>
+                                @Html.ActionLink("Edit", "EditBrand", "Brand",
+                                    new { ItemBrandId = brand.ItemBrandId },
+                                    new { @class = "btn btn-outline-primary fa fa-edit" })
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editBrandModal" tabindex="-1" role="dialog" aria-labelledby="editBrandModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editBrandeModalLabel">Edit Brand</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+   document.addEventListener("DOMContentLoaded", function () {
+       const editBrandButtons = document.querySelectorAll('button[data-toggle="modal"][data-target="#editBrandModal"]');
+
+       editBrandButtons.forEach(button => {
+        button.addEventListener("click", async function () {
+            const ItemBrandId = this.getAttribute('data-id');
+            if (!ItemBrandId) {
+                alert('Invalid ItemBrandId');
+                return;
+            }
+            try {
+                const response = await fetch(`@Url.Action("Edit", "Brand")/${ItemBrandId}`, {
+                    method: 'GET',
+                });
+                if (response.ok) {
+                    const modalContent = await response.text();
+                    document.querySelector('#editBrandModal .modal-body').innerHTML = modalContent;
+
+                    $('#editBrandModal').modal('show');
+                } else {
+                    alert('Failed to load the form. Please try again.');
+                }
+            } catch (error) {
+                console.error("Error loading EditBrand modal:", error);
+                alert('An error occurred while loading the form.');
+            }
+        });
+    });
+});
+
+    </script>
+}

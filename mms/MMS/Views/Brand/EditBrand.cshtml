@@ -1,0 +1,71 @@
+﻿@model MMS.Models.Inventory.ItemBrandVM
+
+@{
+    ViewBag.Title = "Brand Edit ";
+    Layout = "~/Views/Shared/_BestLayout.cshtml";
+
+    int ItemBrandId = Model.ItemBrandId;
+
+}
+<div class="card">
+    <div class="card-header">
+
+        <form action="/Brand/EditBrand" method="post" class="d-inline">
+            <input type="hidden" name="ItemBrandId" value="@ItemBrandId" />
+
+
+            <div class="card-body table-border-style">
+
+     
+                <div class="row">
+                    <div class="col-md-6 ">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ItemType, "Item ")
+                            @Html.DropDownList("Item", ViewBag.Item as SelectList, "-- Select Item --", new { @class = "form-control select2", @required = "required", @id = "Item" })
+                            @Html.ValidationMessageFor(model => model.ItemType, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="MainItem">Main Item</label>
+                            @Html.DropDownListFor(
+                                model => model.MainItem,
+                                ViewBag.MainItem as SelectList,
+                                "-- Select Main Item --",
+                                new { @class = "form-control", required = "required" }
+                            )
+                            @Html.ValidationMessageFor(model => model.MainItem, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Brand, "Brand")
+                                @Html.TextBoxFor(model => model.Brand, new { @class = "form-control", @id = "Brand", @required = "required", @placeholder = "Enter Brand" })
+                                @Html.ValidationMessageFor(model => model.Brand, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Type, "Unit Type")
+                                @Html.TextBoxFor(model => model.Type, new { @class = "form-control", @id = "Type", @required = "required", @placeholder = "Enter Type" })
+                                @Html.ValidationMessageFor(model => model.Type, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            <button type="submit" class="fa fa-check-circle btn btn-primary"><i> Edit Brand</i></button>
+            <h6 style="text-align:right;margin-left:85%;color:coral!important">@ItemBrandId </h6>
+        </form>
+
+    </div>
+
+
+
+</div>
+
+}

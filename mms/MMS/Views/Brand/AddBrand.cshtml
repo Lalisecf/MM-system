@@ -1,0 +1,77 @@
+﻿@model MMS.Models.Inventory.ItemBrandVM
+
+
+@{
+    Layout = "~/Views/Shared/_BestLayout.cshtml";
+}
+@using (Html.BeginForm("AddBrand", "Brand", FormMethod.Post))
+
+{
+    @Html.AntiForgeryToken()
+    <div class="card">
+        <div class="card-header">
+        </div>
+        <div class="card-body table-border-style">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Item">Item</label>
+                        <select id="Item" name="Item" class="form-control" required>
+                            <option value="">-- Select Item --</option>
+                            @foreach (var item in ViewBag.Item as SelectList)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="MainItem">MainItem</label>
+                        <select id="MainItem" name="MainItem" class="form-control" required>
+                            <option value="">-- Select MainItem --</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Brand, "Brand")
+                        @Html.TextBoxFor(model => model.Brand, new { @class = "form-control", @id = "Brand", @required = "required", @placeholder = "Enter Quantity" })
+                        @Html.ValidationMessageFor(model => model.Brand, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Type, "Type")
+                        @Html.TextBoxFor(model => model.Type, new { @class = "form-control", @id = "Type", @required = "required", @placeholder = "EnterType" })
+                        @Html.ValidationMessageFor(model => model.Type, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-save"></i> Save
+                    </button>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+}
+
+
+
+
+
+
+
