@@ -1,0 +1,131 @@
+﻿@model IEnumerable<SharedLayer.Models.Inventory.CustomerMaster>
+
+@{
+    ViewBag.Title = "Supplier";
+    Layout = "~/Views/Shared/_BestLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h5>
+            <button class="btn btn-outline-primary fa fa-user-plus btn-large" data-toggle="modal" data-target="#addCustomerModal">
+                Add Supplier
+            </button>
+        </h5>
+    </div>
+
+    <div class="card-body table-border-style">
+        <div class="table-responsive">
+            <table class="table table-hover" id="commondata">
+                <thead>
+                    <tr>
+                        <th>Supplier No</th>
+                        <th>Supplier Name</th>
+                        <th>AccountNo</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var Customer in Model)
+                    {
+                        <tr>
+                            <td>@Customer.customerNumber</td>
+                            <td>@Customer.customerName</td>
+                            <td>@Customer.AccountNo</td>
+                            <td>
+                                <button type="button" class="btn btn-outline-primary fa fa-edit" data-toggle="modal" data-target="#editCustomerModal" data-id="@Customer.customerNumber">
+                                    Edit
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addCustomerModal" tabindex="-1" role="dialog" aria-labelledby="addCustomerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCustomerModalLabel">Add Supplier</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editCustomerModal" tabindex="-1" role="dialog" aria-labelledby="editCustomerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCustomerModalLabel">Edit Supplier</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const addCustomerButton = document.querySelector('button[data-target="#addCustomerModal"]');
+        if (addCustomerButton) {
+            addCustomerButton.addEventListener("click", async function () {
+                try {
+                    const response = await fetch('@Url.Action("Create", "Customer")', {
+                        method: 'GET',
+                    });
+                    if (response.ok) {
+                        const modalContent = await response.text();
+                        document.querySelector('#addCustomerModal .modal-body').innerHTML = modalContent;
+                        $('#addCustomerModal select').select2({
+                            allowClear: true,
+                            dropdownParent: $('#addCustomerModal .modal-body'),
+                            width: '100%'
+                        });
+                    } else {
+                        alert('Failed to load the form. Please try again.');
+                    }
+                } catch (error) {
+                    console.error("Error loading Add Customer modal:", error);
+                    alert('An error occurred while loading the form.');
+                }
+            });
+        }
+        const editCustButtons = document.querySelectorAll('button[data-toggle="modal"][data-target="#editCustomerModal"]');
+        editCustButtons.forEach(button => {
+     button.addEventListener("click", async function () {
+         const id = this.getAttribute('data-id');
+         try {
+             const response = await fetch(`@Url.Action("Edit", "Customer")/${id}`, {
+                 method: 'GET',
+             });
+             if (response.ok) {
+                 const modalContent = await response.text();
+                 document.querySelector('#editCustomerModal .modal-body').innerHTML = modalContent;
+                 $('#editCustomerModal select').select2({
+                     allowClear: true,
+                     dropdownParent: $('#editCustomerModal .modal-body'),
+                     width: '100%'
+                 });
+             } else {
+                 alert('Failed to load the form. Please try again.');
+             }
+         } catch (error) {
+             console.error("Error loading Edit Customer modal:", error);
+             alert('An error occurred while loading the form.');
+         }
+     });
+ });
+    });
+    </script>
+}

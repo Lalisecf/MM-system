@@ -1,0 +1,73 @@
+﻿@model MMS.Models.Inventory.CustomerMasterVM
+
+@using (Html.BeginForm("Edit", "Customer", FormMethod.Post, new { @id = "editCustomerForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.customerNumber)
+    <input type="hidden" name="UserName" value="@Session["UserName"]" />
+    <div class="container mt-4">
+        <!-- Supplier Name -->
+        <div class="mb-3">
+            @Html.LabelFor(model => model.customerName, "Supplier Name", new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.customerName,
+                new { @class = "form-control", @id = "customerName", @required = "required", @placeholder = "Enter Supplier Name" })
+            @Html.ValidationMessageFor(model => model.customerName, null, new { @class = "text-danger" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(model => model.AccountNo, "AccountNo", new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.AccountNo,
+                new { @class = "form-control", @id = "AccountNo", @required = "required", @placeholder = "01360000311600" })
+            @Html.ValidationMessageFor(model => model.AccountNo, null, new { @class = "text-danger" })
+        </div>
+
+        <!-- Main Category -->
+        <div class="mb-3">
+            <label for="MainPG" class="form-label">Main Category</label>
+            @Html.DropDownListFor(model => model.Category,
+                ViewBag.SupplierCategory as SelectList,
+                "-- Select Main Category --",
+                new { @class = "form-select", required = "required" })
+            @Html.ValidationMessageFor(model => model.Category, null, new { @class = "text-danger" })
+        </div>
+
+        <!-- Supplier Type -->
+        <div class="mb-3">
+            @Html.Label("Supplier Type", htmlAttributes: new { @class = "form-label" })
+            <div class="form-check">
+                @Html.RadioButtonFor(model => model.SupplierType, "Local", new { @class = "form-check-input", @id = "SupplierTypeLocal" })
+                @Html.Label("Local", "Local", new { @class = "form-check-label", @for = "SupplierTypeLocal" })
+            </div>
+            <div class="form-check">
+                @Html.RadioButtonFor(model => model.SupplierType, "Foreign", new { @class = "form-check-input", @id = "SupplierTypeForeign" })
+                @Html.Label("Foreign", "Foreign", new { @class = "form-check-label", @for = "SupplierTypeForeign" })
+            </div>
+            @Html.ValidationMessageFor(model => model.SupplierType, null, new { @class = "text-danger" })
+        </div>
+
+        <!-- Checkboxes for IsActive and IsWithholding -->
+        <div class="row g-3">
+            <!-- Is Active -->
+            <div class="col-md-6">
+                <div class="form-check">
+                    @Html.CheckBoxFor(model => model.IsActive, new { @id = "IsActive", @class = "form-check-input" })
+                    @Html.LabelFor(model => model.IsActive, new { @class = "form-check-label", @for = "IsActive" })
+                    @Html.ValidationMessageFor(model => model.IsActive, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <!-- Is Withholding -->
+            <div class="col-md-6">
+                <div class="form-check">
+                    @Html.CheckBoxFor(model => model.IsWithholding, new { @id = "IsWithholding", @class = "form-check-input" })
+                    @Html.LabelFor(model => model.IsWithholding, new { @class = "form-check-label", @for = "IsWithholding" })
+                    @Html.ValidationMessageFor(model => model.IsWithholding, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="mt-4 text-center">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+}
