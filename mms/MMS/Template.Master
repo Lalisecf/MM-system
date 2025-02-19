@@ -1,0 +1,262 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Template.master.cs" Inherits="Master.Template" %>
+<%@ Import Namespace="SharedLayer.Models" %>
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title>MMS</title>
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="<%= ResolveUrl("~/Img/vertical.ico") %>" type="image/x-icon">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/mmsscript/Scripts/Noty/animate.css") %>" media="screen" />
+    <link href="<%= ResolveUrl("~/assets/datatables/jquery.dataTables.min.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/assets/datatables/buttons.dataTables.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/assets/css/style.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/toastr/content/toastr.min.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Content/css/select2.min.css") %>" rel="stylesheet" />
+
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+
+    <nav class="pcoded-navbar menu-light">
+        <div class="navbar-wrapper">
+            <div class="navbar-content scroll-div">
+                <ul class="nav pcoded-inner-navbar">
+                    <li class="nav-item">
+                        <a href="<%= ResolveUrl("~/Home/Home") %>" class="nav-link">
+                            <span class="pcoded-micon"><i class="feather icon-home"></i></span>
+                            <span class="pcoded-mtext">Dashboard</span>
+                        </a>
+                    </li>
+                    <%
+                        List<MstMenuDefWeb> menuItems = CommonSub.ShowMainMenu()?.ToList();
+                        foreach (var menu in menuItems)
+                        {
+                            var menuIcon = CommonSub.GetMenuIcon(menu.MenuCode);
+                            var subMenus1 = CommonSub.GetMenuHierarchy(menu.MenuCode, 1);
+                    %>
+                    <li class="nav-item <%= (subMenus1.Any() ? "pcoded-hasmenu" : "") %>">
+                        <a href="<%= !string.IsNullOrEmpty(menu.NavigateUrl) ? ResolveUrl(menu.NavigateUrl) : "#!" %>" class="nav-link">
+                            <span class="pcoded-micon"><i class="<%= menuIcon %>"></i></span>
+                            <span class="pcoded-mtext"><%= menu.Description %></span>
+                        </a>
+                        <%
+                            if (subMenus1.Any())
+                            {
+                                Response.Write("<ul class=\"pcoded-submenu\">");
+                                foreach (var submenu1 in subMenus1)
+                                {
+                                    var submenu1Icon = CommonSub.GetMenuIcon(submenu1.MenuCode);
+                                    var subMenus2 = CommonSub.GetMenuHierarchy(submenu1.MenuCode, 2);
+                        %>
+                        <li class="nav-item <%= (subMenus2.Any() ? "pcoded-hasmenu" : "") %>">
+                            <a href="<%= !string.IsNullOrEmpty(submenu1.NavigateUrl) ? ResolveUrl(submenu1.NavigateUrl) : "#!" %>" class="nav-link">
+                                <span><i class="<%= submenu1Icon %>"></i></span>
+                                <span class="pcoded-mtext"><%= submenu1.Description %></span>
+                            </a>
+                            <%
+                                if (subMenus2.Any())
+                                {
+                                    Response.Write("<ul class=\"pcoded-submenu\">");
+                                    foreach (var submenu2 in subMenus2)
+                                    {
+                                        var submenu2Icon = CommonSub.GetMenuIcon(submenu2.MenuCode);
+                                        var subMenus3 = CommonSub.GetMenuHierarchy(submenu2.MenuCode, 3);
+                            %>
+                            <li class="nav-item <%= (subMenus3.Any() ? "pcoded-hasmenu" : "") %>">
+                                <a href="<%= !string.IsNullOrEmpty(submenu2.NavigateUrl) ? ResolveUrl(submenu2.NavigateUrl) : "#!" %>" class="nav-link">
+                                    <span><i class="<%= submenu2Icon %>"></i></span>
+                                    <span class="pcoded-mtext"><%= submenu2.Description %></span>
+                                </a>
+                                <%
+                                    if (subMenus3.Any())
+                                    {
+                                        Response.Write("<ul class=\"pcoded-submenu\">");
+                                        foreach (var submenu3 in subMenus3)
+                                        {
+                                            var submenu3Icon = CommonSub.GetMenuIcon(submenu3.MenuCode);
+                                %>
+                                <li>
+                                    <a href="<%= !string.IsNullOrEmpty(submenu3.NavigateUrl) ? ResolveUrl(submenu3.NavigateUrl) : "#!" %>">
+                                        <span class="pcoded-mtext"><%= submenu3.Description %></span>
+                                    </a>
+                                </li>
+                                <%
+                                        }
+                                        Response.Write("</ul>");
+                                    }
+                                %>
+                            </li>
+                            <%
+                                    }
+                                    Response.Write("</ul>");
+                                }
+                            %>
+                        </li>
+                        <%
+                                }
+                                Response.Write("</ul>");
+                            }
+                        %>
+                    </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">
+        <div class="m-header">
+            <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
+            <a href="#!" class="b-brand">
+                <img src="<%= ResolveUrl("~/Img/AwashLogo.png") %>" alt="" class="logo" style="width: 75%">
+                <img src="<%= ResolveUrl("~/Img/Horizon.jpg") %>" alt="" class="logo-thumb">
+            </a>
+            <a href="#!" class="mob-toggler">
+                <i class="feather icon-more-vertical"></i>
+            </a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="icon feather icon-bell"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right notification">
+                            <div class="noti-head">
+                                <h6 class="d-inline-block m-b-0">Notifications</h6>
+                                <div class="float-right">
+                                    <a href="#!" class="m-r-10">mark as read</a>
+                                    <a href="#!">clear all</a>
+                                </div>
+                            </div>
+                            <ul class="noti-body">
+                                <li class="n-title">
+                                    <p class="m-b-0">NEW</p>
+                                </li>
+                                <li class="notification">
+                                    <div class="media">
+                                        <img class="img-radius" src="<%= ResolveUrl("~/assets/images/user/avatar-1.jpg") %>" alt="Generic placeholder image">
+                                        <div class="media-body">
+                                            <p><strong>John Doe</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>5 min</span></p>
+                                            <p>New ticket Added</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="noti-footer">
+                                <a href="#!">show all</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="dropdown drp-user">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="feather icon-user"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-notification">
+                            <div class="pro-head">
+                                <img src="<%= ResolveUrl("~/Img/imageedit_4_4535748408.png") %>" style="border-radius: 50%; object-fit: cover; border: 3px solid #fff;" alt="User-Profile-Image">
+                                <span class="fw-bold">
+                                    <% if (HttpContext.Current.Session["UserName"] != null) { %>
+                                        <%= HttpContext.Current.Session["UserName"].ToString() %>
+                                    <% } %>
+                                </span>
+                            </div>
+                            <ul class="pro-body">
+                                <li>
+                                    <a href="#!" class="dropdown-item">
+                                        <i class="feather icon-align-right"></i>
+                                        <% if (HttpContext.Current.Session["RoleName"] != null) { %>
+                                            <%= HttpContext.Current.Session["RoleName"].ToString() %>
+                                        <% } %>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="email_inbox.html" class="dropdown-item">
+                                        <i class="feather icon-bar-chart-2"></i>
+                                        <% if (HttpContext.Current.Session["BranchName"] != null) { %>
+                                            <%= HttpContext.Current.Session["BranchName"].ToString() %>
+                                        <% } %>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<%= ResolveUrl("~/Login/Login") %>" class="dropdown-item">
+                                        <i class="feather icon-log-out"></i>Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="pcoded-main-container">
+        <div class="pcoded-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">Awash Bank</h5>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#!"><i class="feather icon-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="#!">Material Management System</a></li>
+                                <li class="breadcrumb-item">
+                                    <asp:Label runat="server" ID="lblTitle" align="center" Font-Bold="true" Font-Size="Large" ForeColor="#ff9900"></asp:Label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ breadcrumb ] end -->
+
+            <form id="form1" runat="server">
+                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                <div>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+                </div>
+            </form>
+            <!-- [ Main Content ] end -->
+        </div>
+    </div>
+    <script src="<%= ResolveUrl("~/Scripts/jquery-3.7.1.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Scripts/select2.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/assets/js/plugins/jquery-ui.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/assets/js/plugins/perfect-scrollbar.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/assets/js/plugins/bootstrap.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/assets/js/ripple.js") %>"></script>
+    <script src="<%= ResolveUrl("~/assets/js/pcoded.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/toastr/scripts/toastr.min.js") %>"></script>
+
+    <!-- New Scripts Placeholder -->
+    <asp:ContentPlaceHolder ID="FooterContent" runat="server"></asp:ContentPlaceHolder>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            <% if (Session["Success"] != null) { %>
+                toastr.success('<%= Session["Success"].ToString() %>');
+                <% Session["Success"] = null; %>
+            <% } %>
+            <% if (Session["Error"] != null) { %>
+                toastr.error('<%= Session["Error"].ToString() %>');
+                <% Session["Error"] = null; %>
+            <% } %>
+        });
+    </script>
+</body>
+</html>
