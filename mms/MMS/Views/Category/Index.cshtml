@@ -1,0 +1,147 @@
+﻿@model IEnumerable<SharedLayer.Models.Inventory.tblCategory>
+
+@{
+    ViewBag.Title = "Categories";
+    Layout = "~/Views/Shared/_BestLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h5>
+            <button class="btn btn-outline-primary fa fa-user-plus btn-large" data-toggle="modal" data-target="#addCategoryModal">
+                Add Category
+            </button>
+        </h5>
+    </div>
+
+    <div class="card-body table-border-style">
+        <div class="table-responsive">
+            <table class="table table-hover" id="commondata">
+                <thead>
+                    <tr>
+                        <th>Category Code</th>
+                        <th width="5%">Description</th>
+                        <th>StockAccountSegment</th>
+                        <th>ExpenseAccountSegment</th>
+                        <th>IFBExpenseAccount</th>
+                        <th>UsefullLife</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var category in Model)
+                    {
+                        <tr>
+                            <td>@category.CatCode</td>
+                            <td>@category.CatDesc</td>
+                            <td>@category.StockAccountSegment</td>
+                            <td>@category.ExpenseAccountSegment</td>
+                            <td>@category.IFBExpenseAccount</td>
+                            <td>@category.UsefullLife</td>
+                            <td>
+                                <button type="button" class="btn btn-outline-primary fa fa-edit" data-toggle="modal" data-target="#editCategoryModal" data-id="@category.CatCode">
+                                    Edit
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Add Category Modal -->
+    <div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCategoryModalLabel">Add Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Category Modal -->
+    <div class="modal fade" id="editCategoryModal" tabindex="-1" role="dialog" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <!-- modal-lg for larger size -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCategoryModalLabel">Edit Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Content will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Add Category modal
+        const addCategoryButton = document.querySelector('button[data-target="#addCategoryModal"]');
+        if (addCategoryButton) {
+            addCategoryButton.addEventListener("click", async function () {
+                try {
+                    const response = await fetch('@Url.Action("Create", "Category")', {
+                        method: 'GET',
+                    });
+                    if (response.ok) {
+                        const modalContent = await response.text();
+                        document.querySelector('#addCategoryModal .modal-body').innerHTML = modalContent;
+                        // Initialize select2 if needed
+                        $('#addCategoryModal select').select2({
+                            allowClear: true,
+                            dropdownParent: $('#addCategoryModal .modal-body'),
+                            width: '100%'
+                        });
+                    } else {
+                        alert('Failed to load the form. Please try again.');
+                    }
+                } catch (error) {
+                    console.error("Error loading Add Category modal:", error);
+                    alert('An error occurred while loading the form.');
+                }
+            });
+        }
+
+        // Edit Category modal
+        const editCatButtons = document.querySelectorAll('button[data-toggle="modal"][data-target="#editCategoryModal"]');
+        editCatButtons.forEach(button => {
+            button.addEventListener("click", async function () {
+                const CatCode = this.getAttribute('data-id');
+                try {
+                    const response = await fetch(`@Url.Action("Edit", "Category")/${CatCode}`, {
+                        method: 'GET',
+                    });
+                    if (response.ok) {
+                        const modalContent = await response.text();
+                        document.querySelector('#editCategoryModal .modal-body').innerHTML = modalContent;
+
+                        $('#editCategoryModal select').select2({
+                            allowClear: true,
+                            dropdownParent: $('#editCategoryModal .modal-body'),
+                            width: '100%'
+                        });
+                    } else {
+                        alert('Failed to load the form. Please try again.');
+                    }
+                } catch (error) {
+                    console.error("Error loading Edit Category modal:", error);
+                    alert('An error occurred while loading the form.');
+                }
+            });
+        });
+    });
+    </script>
+}

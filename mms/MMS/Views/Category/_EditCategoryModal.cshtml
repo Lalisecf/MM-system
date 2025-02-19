@@ -1,0 +1,109 @@
+﻿@model MMS.Models.Inventory.CategoryVM
+
+@using (Html.BeginForm("Edit", "Category", FormMethod.Post, new { @id = "editCategoryForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.CatCode)
+
+    <div class="container">
+        <!-- Category and Main Category -->
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CategoryType, "Category Description")
+                    @Html.DropDownList("Category", ViewBag.Category as SelectList, "-- Select Category --", new { @class = "form-control select2", @required = "required", @id = "Category" })
+                    @Html.ValidationMessageFor(model => model.CategoryType, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label for="MainPG">Main Category</label>
+                    @Html.DropDownListFor(model => model.MainPG,
+                        ViewBag.MainCategory as SelectList,
+                        "-- Select Main Category --",
+                        new { @class = "form-control", required = "required" })
+                    @Html.ValidationMessageFor(model => model.MainPG, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Code and Description -->
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label for="CatCode">Category Code</label>
+                    @Html.TextBoxFor(model => model.CatCode,
+                        new { @class = "form-control", @placeholder = "Enter Category Code", @required = "required", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.CatCode, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label for="CatDesc">Category Description</label>
+                    @Html.TextBoxFor(model => model.CatDesc,
+                        new { @class = "form-control", @placeholder = "Enter Category Description", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.CatDesc, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <!-- Account Segments -->
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label for="StockAccountSegment">Stock Account</label>
+                    @Html.TextBoxFor(model => model.StockAccountSegment,
+                        new { @class = "form-control", @placeholder = "Enter Stock Account", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.StockAccountSegment, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label for="ExpenseAccountSegment">Expense Account</label>
+                    @Html.TextBoxFor(model => model.ExpenseAccountSegment,
+                        new { @class = "form-control", @placeholder = "Enter Expense Account", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.ExpenseAccountSegment, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <!-- IFB Expense Account and Useful Life -->
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label for="IFBExpenseAccount">IFB Expense Account</label>
+                    @Html.TextBoxFor(model => model.IFBExpenseAccount,
+                        new { @class = "form-control", @placeholder = "Enter IFB Expense Account", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.IFBExpenseAccount, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label for="UsefullLife">Useful Life</label>
+                    @Html.TextBoxFor(model => model.UsefullLife,
+                        new { @class = "form-control", @placeholder = "Enter Useful Life", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.UsefullLife, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <!-- Is Active Checkbox -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-check">
+                    @Html.CheckBoxFor(model => model.IsActive,
+                        new { @class = "form-check-input", @id = "isActive" })
+                    <label class="form-check-label" for="isActive">Is Active</label>
+                    @Html.ValidationMessageFor(model => model.IsActive, null, new { @class = "text-danger" })
+                </div>
+            </div>
+           
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary">Save</button>
+    </div>
+}

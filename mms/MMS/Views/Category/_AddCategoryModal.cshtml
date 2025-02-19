@@ -1,0 +1,62 @@
+﻿@model MMS.Models.Inventory.CategoryVM
+
+@using (Html.BeginForm("Create", "Category", FormMethod.Post, new { @id = "addCategoryForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoryType, "Category Description")
+            @Html.DropDownListFor(model=>model.CategoryType, ViewBag.Category as SelectList, "-- Select Category --", new { @class = "form-control select2", @required = "required", @id = "Category" })
+            @Html.ValidationMessageFor(model => model.CategoryType, null, new { @class = "text-danger" })
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="MainPG">Main Category</label>
+                    <select id="MainPG" name="MainPG" class="form-control" required>
+                        <option value="">-- Select Main Category --</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CatDesc, "Category Description")
+                    @Html.TextBoxFor(model => model.CatDesc,
+                        new { @class = "form-control", @id = "catDesc", @required = "required", @placeholder = "Enter Category Description" })
+                    @Html.ValidationMessageFor(model => model.CatDesc, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        @*<div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TagCode, "Tag Code")
+                    @Html.TextBoxFor(model => model.TagCode,
+                        new { @class = "form-control", @id = "TagCode", @required = "required", @placeholder = "Enter TagCode" })
+                    @Html.ValidationMessageFor(model => model.TagCode, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>*@
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-check">
+                    @Html.CheckBoxFor(model => model.IsActive, new { @class = "form-check-input", @id = "isActive" })
+                    <label class="form-check-label" for="isActive">Is Active</label>
+                    @Html.ValidationMessageFor(model => model.IsActive, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-outline-primary">Save</button>
+            </div>
+        </div>
+    </div>
+}
