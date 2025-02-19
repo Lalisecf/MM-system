@@ -1,0 +1,79 @@
+﻿@model SharedLayer.AB_Common.SystemTools.cmsDashboardModels 
+@{
+    Layout = "~/Views/Shared/_BestLayout.cshtml";
+}
+<!DOCTYPE html>
+
+<div class="box  box-primary" style="width: 95%; margin-right: 0px; margin-left: 20px; margin-top: 10px">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h4>
+                        @Model.WaitingList
+                    </h4>
+                    <p>
+                        On Progress List
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-users"></i>
+                </div>
+                <a href="~/LeaveDetails/pendingList" class="small-box-footer">
+                    View <i style="height:40px" class=" glyphicon glyphicon-repeat"></i>
+                </a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h4>@Model.claimApprovedList</h4>
+                    <p>
+                      Claim  ApprovedList 
+
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-check-square-o"></i>
+                </div>
+                <a href="~/LeaveDetails/ApprovedList" class="small-box-footer">
+                    View <i style="height:40px" class="glyphicon glyphicon-shopping-cart yellow"></i>
+                </a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h4>
+                        @Model.NotAprovedList
+                    </h4>
+                    <p>
+                        Not Aproved claim
+
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-minus-square-o"></i>
+                </div>
+                <a href="~/LeaveDetails/NotApprovedList" class="small-box-footer">
+                    View <i style="height:40px" class="glyphicon glyphicon-trash"></i>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.row -->
+    <!-- top row -->
+    <div class="row">
+        <div class="col-xs-12 connectedSortable">
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</div>
