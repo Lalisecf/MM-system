@@ -1,0 +1,78 @@
+﻿@using SharedLayer.Models
+@{
+    List<MstMenuDefWeb> menuItems = CommonSub.ShowMainMenu()?.ToList();
+}
+
+<!-- Dashboard Menu -->
+<li class="nav-item">
+    <a href="@Url.Content("~/Login/Login")" class="nav-link">
+        <span class="pcoded-micon"><i class="feather icon-home"></i></span>
+        <span class="pcoded-mtext">Dashboard</span>
+    </a>
+</li>
+
+<!-- Dynamic Menus -->
+@foreach (var menu in menuItems)
+{
+    var menuIcon = CommonSub.GetMenuIcon(menu.MenuCode);
+    var subMenus1 = CommonSub.GetMenuHierarchy(menu.MenuCode, 1);
+
+    <li class="nav-item @(subMenus1.Any() ? "pcoded-hasmenu" : "")">
+        <a href="@(!string.IsNullOrEmpty(menu.NavigateUrl) ? Url.Content(menu.NavigateUrl) : "#!")" class="nav-link">
+            <span class="pcoded-micon"><i class="@menuIcon"></i></span>
+            <span class="pcoded-mtext">@menu.Description</span>
+        </a>
+
+        @if (subMenus1.Any())
+        {
+            <ul class="pcoded-submenu">
+                @foreach (var submenu1 in subMenus1)
+                {
+                    var submenu1Icon = CommonSub.GetMenuIcon(submenu1.MenuCode);
+                    var subMenus2 = CommonSub.GetMenuHierarchy(submenu1.MenuCode, 2);
+
+                    <li class="nav-item @(subMenus2.Any() ? "pcoded-hasmenu" : "")">
+                        <a href="@(!string.IsNullOrEmpty(submenu1.NavigateUrl) ? Url.Content(submenu1.NavigateUrl) : "#!")" class="nav-link">
+                            <span><i class="@submenu1Icon"></i></span>
+                            <span class="pcoded-mtext">@submenu1.Description</span>
+                        </a>
+
+                        @if (subMenus2.Any())
+                        {
+                            <ul class="pcoded-submenu">
+                                @foreach (var submenu2 in subMenus2)
+                                {
+                                    var submenu2Icon = CommonSub.GetMenuIcon(submenu2.MenuCode);
+                                    var subMenus3 = CommonSub.GetMenuHierarchy(submenu2.MenuCode, 3);
+
+                                    <li class="nav-item @(subMenus3.Any() ? "pcoded-hasmenu" : "")">
+                                        <a href="@(!string.IsNullOrEmpty(submenu2.NavigateUrl) ? Url.Content(submenu2.NavigateUrl) : "#!")" class="nav-link">
+                                            <span><i class="@submenu2Icon"></i></span>
+                                            <span class="pcoded-mtext">@submenu2.Description</span>
+                                        </a>
+
+                                        @if (subMenus3.Any())
+                                        {
+                                            <ul class="pcoded-submenu">
+                                                @foreach (var submenu3 in subMenus3)
+                                                {
+                                                    var submenu3Icon = CommonSub.GetMenuIcon(submenu3.MenuCode);
+
+                                                    <li>
+                                                        <a href="@(!string.IsNullOrEmpty(submenu3.NavigateUrl) ? Url.Content(submenu3.NavigateUrl) : "#!")">
+                                                            <span class="pcoded-mtext">@submenu3.Description</span>
+                                                        </a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </li>
+                }
+            </ul>
+        }
+    </li>
+}

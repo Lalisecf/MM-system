@@ -1,0 +1,138 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "_HeaderPartial";
+}
+
+<header class="header">
+    @if (Convert.ToInt32(Session["Role"]) == 2)
+    {
+        <a href="~/Person/Search" class="logo">
+            Awash MMS
+        </a>
+    }
+    @if (Convert.ToInt32(Session["Role"]) == 3)
+    {
+        <a href="~/Person/Search" class="logo">
+            Awash MMS
+        </a>
+    }
+    @if (Convert.ToInt32(Session["Role"]) == 1)
+    {
+        <a href="~/Person/Search" class="logo">
+            Awash MMS
+        </a>
+
+    }
+    @if (Convert.ToInt32(Session["Role"]) == 7)
+    {
+        <a href="~/Person/Search" class="logo">
+            Awash MMS
+        </a>
+
+    }
+    @if (Convert.ToInt32(Session["Role"]) == 5)
+    {
+        <a href="~/Person/Searches" class="logo">
+            Awash MMS
+        </a>
+
+    }
+    @if (Convert.ToInt32(Session["Role"]) == 6)
+    {
+        <a href="~/Person/Searches" class="logo">
+            Awash MMS
+        </a>
+
+    }
+
+    <nav class="navbar navbar-static-top" role="navigation">
+
+        <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button" style="width:500px">
+            <span class="sr-only" style="background-color:Coral">Awash MMS</span>
+            <span class="icon-bar" style="background-color:Coral"></span>
+            <span class="icon-bar" style="background-color:Coral"></span>
+            <span class="icon-bar" style="background-color:Coral"></span>
+            <span class="icon-bar" style="background-color:Coral"></span>
+
+        </a>
+        <div class="navbar-right" style="font-size:12px;font-weight:200">
+            <ul class="nav navbar-nav">
+                <!-- User Account: style can be found in dropdown.less -->
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="glyphicon glyphicon-user"></i>
+                        <span>@Session["Username"]<i class="caret"></i></span>
+
+                    </a>
+
+                    <ul class="dropdown-menu" style="height:20px">
+                        <!-- User image -->
+                        <li class="user-header bg-light-blue">
+                            @*<img src="~/Content/img/AwashBank1.png" class="img-circle" alt="User Image" />*@
+
+                            <p>
+                                @*@Session["UserFirstname"]*@
+                                @if (Session["Roleer"] != null)
+                                {
+                                    <span>@Session["Roleer"] Of @Session["BranchName"]<i class="caret"></i></span>
+                                }
+                            </p>
+                            @if (@Session["pic"] != null)
+                            {
+                                @*<img src="~/assets/img/avatar.png" alt=@Session["pic"] height="70" width="70" />*@
+                                byte[] base66 = (byte[])Session["pic"];
+                                var base64 = Convert.ToBase64String(base66);
+                                var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+                                <img src="@imgSrc" alt="@Session["UserFirstname"] " class="img-circle" height="70" width="70" />
+                            }
+                        </li>
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+
+                            <div class="pull-right">
+                                <a href="~/Login/Logout" class="btn btn-default btn-flat">Sign out</a>
+                            </div>
+                            <div class="pull-right">
+                                <a href="~/Login/changeLogin" class="btn btn-default btn-flat">Change Password</a>
+                            </div>
+                        </li>
+                    </ul>
+                    @*</div>*@
+                </li>
+            </ul>
+        </div>
+    </nav>
+    @*</div>*@
+    @if (Convert.ToInt32(Session["Role"]) == 2)
+    {<div>
+            @if (TempData["PersonGuid"] != null)
+            {
+                <div class="navbar-collapse collapse" style="padding-left:280px;padding-top:-300px;margin-top:-150px">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("CASH INDEMINITY", "ListCashIndeminity", "CashIndeminity")</li>
+                    </ul>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        if (TempData["PersonGuid"] != null)
+        {
+            <div class="navbar-collapse" style=" margin-left:-250px;margin-top: 1px ;color:#fe9a42">
+                <ul class="nav navbar-nav" style="margin-left:-450px;color:#fe9a42">
+                    <li>@Html.ActionLink("BACK TO LIST", "EmployeeList", "Person")</li>
+                    <li>@Html.ActionLink("INCOME", "ListIncomeHistory", "PersonIncomeHistory")</li>
+                    <li>@Html.ActionLink("DEDUCTION", "ListDeductionHistory", "PersonDeductionHistory")</li>
+                    <li>@Html.ActionLink("LOAN", "ListLoan", "Loan")</li>
+                    <li>@Html.ActionLink("CASAVING", "ListSaving", "CASAVING")</li>
+                    <li>@Html.ActionLink("OVERTIME", "ListOverTime", "OverTime")</li>
+                    <li>@Html.ActionLink("COST SHARING", "ListCostSharing", "CostSharingF")</li>
+                    <li>@Html.ActionLink("CASH INDEMINITY", "ListCashIndeminity", "CashIndeminity")</li>
+                    <li>@Html.ActionLink("MEDICAL", "List", "Medical")</li>
+                </ul>
+            </div>
+        }
+    }
+</header>

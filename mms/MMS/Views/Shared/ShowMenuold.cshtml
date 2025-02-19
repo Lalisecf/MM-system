@@ -1,0 +1,73 @@
+﻿@model List<MMS.Models.MstMenuDefWebViewModel>
+
+<nav class="pcoded-navbar menupos-fixed menu-light brand-blue">
+    <div class="navbar-wrapper">
+        <div class="navbar-brand header-logo">
+            <a href="~/Person/Search" class="b-brand text-warning fab fa-cc-amazon-pay text-">
+                <span class="text-white">Material Management System</span>
+            </a>
+            <a class="mobile-menu" id="mobile-collapse" href="#"><span></span></a>
+        </div>
+        <div class="navbar-content scroll-div">
+            <ul class="nav pcoded-inner-navbar">
+                <li class="nav-item">
+                    <a href="~/Person/Search">
+                        <span class="pcoded-micon"><i class="fa fa-home fa-fw"></i></span>
+                        <span class="pcoded-mtext"> HOME </span>
+                    </a>
+                </li>
+                @* Loop through all menu items and render based on MenuLevel *@
+                @foreach (var menu in Model)
+                {
+                    <li class="nav-item @GetMenuClass(menu.MenuLevel)">
+                        <a href="@menu.NavigateUrl">
+                            <span class="pcoded-micon">
+                                <i class="fa @GetIcon(menu.MenuCode)"></i>
+                            </span>
+                            <span class="pcoded-mtext"> @menu.Description </span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</nav>
+
+@functions {
+    // Helper function to return an icon class based on MenuCode
+    private string GetIcon(int menuCode)
+    {
+        return menuCode switch
+        {
+            7 => "fa-user-plus",
+            7018 => "fa-cog",
+            6017 => "fa-users",
+            7021 => "fa-list",
+            8023 => "fa-envelope",
+            6018 => "fa-circle-o-notch",
+            7019 => "fa-pencil-square",
+            7020 or 8021 => "fa-check-circle-o text-success",
+            8018 => "fa-usd",
+            7017 => "fa-refresh",
+            7023 => "fa-line-chart",
+            6019 => "fa-line-chart",
+            8019 => "fa-th-list",
+            8017 => "fa-tasks",
+            8027 => "fa-check-square-o text-c-blue",
+            8028 => "fa-paper-plane",
+            _ => "fa-bar-chart" // Default icon
+        };
+    }
+
+    // Helper function to return CSS class based on MenuLevel
+    private string GetMenuClass(int? menuLevel)
+    {
+        return menuLevel switch
+        {
+            1 => "menu-level-1", // top level menu styling
+            2 => "menu-level-2", // second level styling (e.g., indented)
+            3 => "menu-level-3", // third level styling, if needed
+            _ => "menu-level-default" // default style for other levels
+        };
+    }
+}

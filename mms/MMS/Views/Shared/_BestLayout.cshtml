@@ -1,0 +1,379 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>MMS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <!-- Favicon icon -->
+    <link rel="icon" href="~/Img/vertical.ico" type="image/x-icon">
+    <!-- Select2 CSS -->
+    <link href="~/assets/datatables/jquery.dataTables.min.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="~/assets/datatables/buttons.dataTables.css" rel="stylesheet" />
+    <link href="~/assets/datatables/jquery.dataTables.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link href="~/toastr/content/toastr.min.css" rel="stylesheet" />
+    <link href="~/Content/css/select2.min.css" rel="stylesheet" />
+</head>
+<body class="">
+    <!-- [ Pre-loader ] start -->
+    @*<div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>*@
+    <nav class="pcoded-navbar menu-light ">
+        <div class="navbar-wrapper  ">
+            <div class="navbar-content scroll-div ">
+                <ul class="nav pcoded-inner-navbar ">
+                    @Html.Action("ShowMenus", "Dashboard")
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">
+        <div class="m-header">
+            <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
+            <a href="#!" class="b-brand">
+                <img src="~/Img/AwashLogo.png" alt="Logo" class="logo" style="width:75%" loading="eager">
+                <img src="~/Img/Horizon.jpg" alt="Logo Thumb" class="logo-thumb" loading="eager">
+            </a>
+            <a href="#!" class="mob-toggler">
+                <i class="feather icon-more-vertical"></i>
+            </a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="icon feather icon-bell"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right notification">
+                            <div class="noti-head">
+                                <h6 class="d-inline-block m-b-0">Notifications</h6>
+                                <div class="float-right">
+                                    <a href="#!" class="m-r-10">mark as read</a>
+                                    <a href="#!">clear all</a>
+                                </div>
+                            </div>
+                            <ul class="noti-body">
+                                <li class="n-title">
+                                    <p class="m-b-0">NEW</p>
+                                </li>
+                                <li class="notification">
+                                    <div class="media">
+                                        <img class="img-radius" src="~/assets/images/user/avatar-1.jpg" alt="Generic placeholder image">
+                                        <div class="media-body">
+                                            <p><strong>John Doe</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>5 min</span></p>
+                                            <p>New ticket Added</p>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                            <div class="noti-footer">
+                                <a href="#!">show all</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="dropdown drp-user">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="feather icon-user"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-notification">
+                            <div class="pro-head">
+                                <img src="~/Img/imageedit_4_4535748408.png" style=" border-radius: 50%; object-fit: cover; border: 3px solid #fff;" alt="User-Profile-Image">
+                                <span class="fw-bold">
+                                    @if (Session["UserName"] != null)
+                                    {
+                                        @Session["UserName"].ToString()
+                                    }
+                                </span>
+                            </div>
+                            <ul class="pro-body">
+                                <li>
+                                    <a href="#!" class="dropdown-item">
+                                        <i class="feather icon-align-right"></i>
+                                        @if (Session["RoleName"] != null)
+                                        {
+                                            @Session["RoleName"].ToString()
+                                        }
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="email_inbox.html" class="dropdown-item">
+                                        <i class="feather icon-bar-chart-2"></i>
+                                        @if (Session["BranchName"] != null)
+                                        {
+                                            @Session["BranchName"].ToString()
+                                        }
+                                    </a>
+                                </li>
+                                <li><a href="~/Login/Login" class="dropdown-item"><i class="feather icon-log-out"></i> Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+
+    </header>
+    <!-- [ Header ] end -->
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">Awash Bank</h5>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#!"><i class="feather icon-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="#!">Material Management System</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ breadcrumb ] end -->
+            <!-- [ Main Content ] start -->
+            @RenderBody()
+            <!-- [ Main Content ] end -->
+        </div>
+    </div>
+    <!--   Core JS Files   -->
+    <script src="~/Scripts/jquery-3.7.1.min.js" ></script>
+    <script src="~/Scripts/select2.min.js" defer></script>
+    <!-- jQuery UI -->
+    <script src="~/assets/js/plugins/jquery-ui.min.js" defer></script>
+    <!-- jQuery Scrollbar -->
+    <script src="~/assets/js/plugins/perfect-scrollbar.min.js" defer></script>
+    <!-- Datatables -->
+    <script src="~/assets/datatables/jquery.dataTables.min.js" defer></script>
+    <script src="~/assets/datatables/buttons.dataTables.min.js" defer></script>
+    <script src="~/assets/datatables/jszip.min.js" defer></script>
+    <script src="~/assets/datatables/pdfmake.min.js" defer></script>
+    <script src="~/assets/datatables/buttons.html5.min.js" defer></script>
+    <script src="~/assets/datatables/vfs_fonts.js" defer></script>
+
+    <script src="~/assets/js/plugins/bootstrap.min.js" defer></script>
+    <script src="~/assets/js/ripple.js" defer></script>
+    <script src="~/assets/js/pcoded.min.js" defer></script>
+    <script src="~/toastr/scripts/toastr.min.js" defer></script>
+    <script>
+        function handleTouchStart(event) {
+        }
+
+        function handleScroll(event) {
+        }
+
+        window.addEventListener('touchstart', handleTouchStart, { passive: true });
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        $(function () {
+            var Success = "@(TempData["Success"] as string)";
+            var Error1 = "@(TempData["Error"] as string)";
+            var Warning = "@(TempData["Warning"] as string)";
+            if (Success !== "") { toastr.success(Success) }
+            if (Error1 !== "") { toastr.error(Error1) }
+            if (Warning !== "") { toastr.warning(Warning) }
+        });
+       
+        $(document).ready(function () {
+            $('#example2').DataTable({
+                "ordering": true,
+                pageLength: 8,
+                lengthChange: true,
+                searching: true,
+                info: true,
+                paging: true,
+                autoWidth: true,
+                responsive: true,
+            });
+        });
+        $(document).ready(function () {
+            $('#commondata').DataTable({
+                ordering: true,
+                pageLength: 10,
+                lengthChange: true,
+                searching: true,
+                info: true,
+                paging: true,
+                autoWidth: false,
+                responsive: true,
+            });
+        });
+
+        $(document).ready(function () {
+            $('#userid').DataTable({
+                "ordering": true,
+                dom: 'Bfrtip',
+                buttons: ['copy', 'excel', 'pdf', 'csv']
+            });
+        });
+
+        $(document).ready(function () {
+            $('#items2').DataTable({
+                "ordering": true,
+                dom: 'Bfrtip',
+                buttons: ['copy', 'excel', 'pdf', 'csv']
+            });
+        });
+        $(document).ready(function () {
+            $('#DepCalcMethod').select2({
+                placeholder: "Select depreciation method",
+                allowClear: true
+            });
+        });
+        $(document).ready(function () {
+            $('#fYear').select2({
+                placeholder: "Select Fiscal Year",
+                allowClear: true
+            });
+        });
+
+        $(document).ready(function () {
+            $('#Item').select2({
+                placeholder: "Select Item",
+                allowClear: true
+            });
+        });
+        $(document).ready(function () {
+            $('#supplier').select2({
+                placeholder: "Select Supplier",
+                allowClear: true
+            });
+        });
+
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $(document).on('change', '#Category', function () {
+                var categoryType = $(this).val();
+                var mainCategoryDropdown = $('#MainPG');
+                mainCategoryDropdown.empty();
+                mainCategoryDropdown.append('<option value="">-- Select Main Category --</option>');
+                if (categoryType) {
+                    $.ajax({
+                        url: '@Url.Action("GetMainCategories", "Category")',
+                        type: 'GET',
+                        data: { categoryType: categoryType },
+                        success: function (data) {
+                            if (data && data.length > 0) {
+                                $.each(data, function (index, item) {
+                                    mainCategoryDropdown.append('<option value="' + item.Value + '">' + item.Text + '</option>');
+                                });
+                            } else {
+                                mainCategoryDropdown.append('<option value="">No categories available</option>');
+                            }
+                        },
+                        error: function () {
+                            alert('Error fetching main categories.');
+                        }
+                    });
+                }
+            });
+        });
+
+          $(document).ready(function () {
+              $(document).on('change', '#MainPG', function () {
+          var mainCategoryDropdown = $(this).val();
+          var itemDropdown = $('#itemValue');
+          itemDropdown.empty();
+                  itemDropdown.append('<option value="">-- Select item --</option>');
+          if (mainCategoryDropdown) {
+              $.ajax({
+                  url: '@Url.Action("GetItemsByCatCode", "Item")',
+                  type: 'GET',
+                  data: { CatCode: mainCategoryDropdown },
+                  success: function (data) {
+                      if (data && data.length > 0) {
+                          $.each(data, function (index, item) {
+                              itemDropdown.append('<option value="' + item.Value + '">' + item.Text + '</option>');
+                          });
+                      } else {
+                          itemDropdown.append('<option value="">No Items available</option>');
+                      }
+                  },
+                  error: function () {
+                      alert('Error fetching items.');
+                  }
+              });
+          }
+      });
+  });
+
+      $(document).ready(function () {
+     $(document).on('change', '#Item', function () {
+         console.log('Item dropdown changed');
+         var itemType = $(this).val();
+         var mainItemDropdown = $('#MainItem');
+         mainItemDropdown.empty();
+         mainItemDropdown.append('<option value="">-- Select Main Item --</option>');
+         if (itemType) {
+             $.ajax({
+                 url: '@Url.Action("GetMainItems", "Item")',
+                 type: 'GET',
+                 data: { itemType: itemType },
+                 success: function (data) {
+                     if (data && data.length > 0) {
+                         $.each(data, function (index, item) {
+                             mainItemDropdown.append('<option value="' + item.Value + '">' + item.Text + '</option>');
+                         });
+                     } else {
+                         mainItemDropdown.append('<option value="">No Items available</option>');
+                     }
+                 },
+                 error: function () {
+                     alert('Error fetching main Items.');
+                 }
+             });
+         }
+     });
+      });
+
+
+     $(document).ready(function () {
+    $(document).on('change', '#MainItem', function () {
+        var mainItemId = $(this).val(); 
+        var brandDropdown = $('#Brand'); 
+
+        brandDropdown.empty();
+        brandDropdown.append('<option value="">-- Select Brand --</option>');
+
+        if (mainItemId) {
+            $.ajax({
+                url: '@Url.Action("GetBrandsByMainItem", "Purchase")',
+                type: 'GET',
+                data: { mainItemId: mainItemId },
+                success: function (data) {
+                    if (data && data.length > 0) {
+                        $.each(data, function (index, item) {
+                            brandDropdown.append('<option value="' + item.Value + '">' + item.Text + '</option>');
+                        });
+                    } else {
+                        brandDropdown.append('<option value="">No brands available</option>');
+                    }
+                },
+                error: function () {
+                    alert('Error fetching brands.');
+                }
+            });
+        }
+    });
+});
+
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
