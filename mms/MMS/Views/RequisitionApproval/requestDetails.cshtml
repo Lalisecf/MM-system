@@ -1,0 +1,224 @@
+﻿@model IEnumerable<MMS.Models.Inventory.RquestDetailVM>
+
+@{
+    ViewBag.Title = "Request Details";
+    Layout = "~/Views/Shared/_BestLayout.cshtml";
+    string ReqNo = ViewBag.ReqNo as string;
+}
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="row">
+            <button class="btn btn-outline-success btn-large fa fa-check-circle"
+                    data-toggle="modal"
+                    data-target="#approveRequestDetailModal">
+                Approve Request
+            </button>
+            <button class="btn btn-outline-danger btn-large fa fa-window-close"
+                    data-toggle="modal"
+                    data-target="#rejectRequestDetailModal"
+                    data-id="@ReqNo">
+                Reject Request
+            </button>
+        </h5>
+        <h6 class="text-right" style="color: coral;">@ReqNo</h6>
+    </div>
+    <div class="card-body table-border-style">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Product</th>
+                        <th>Quantity Requested</th>
+                        <th>UnitCost</th>
+                        <th>Request Date (Eth)</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">No request details found.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var request in Model)
+                        {
+                <tr>
+                    <td>@request.IdNo</td>
+                    <td>@(string.IsNullOrWhiteSpace(request.ProdCode) ? "-" : request.ProdCode)</td>
+                    <td>
+                        <span>@request.QtyReq</span>
+                        <button class="btn btn-outline-primary btn-sm ml-2"
+                                data-toggle="modal"
+                                data-target="#updateQuantityModal"
+                                data-id="@request.IdNo"
+                                data-qtyreq="@request.QtyReq">
+                            Amend
+                        </button>
+                    </td>
+                    <td>@request.UnitCost</td>
+                    <td>@(string.IsNullOrWhiteSpace(request.ReqDateEth) ? "-" : request.ReqDateEth)</td>
+                    <td>
+                        <button class="btn btn-outline-danger fa fa-trash"
+                                data-toggle="modal"
+                                data-target="#deleteRequestDetailModal"
+                                data-id="@request.IdNo">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer d-flex justify-content-between">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-outline-primary" })
+    </div>
+</div>
+@* Approve Modal *@
+<div class="modal fade" id="approveRequestDetailModal" tabindex="-1" role="dialog" aria-labelledby="approveRequestDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content card-style">
+            <div class="modal-header">
+                <h5 class="modal-title" id="approveRequestDetailModalLabel">Confirm Approval</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to approve the request with ReqNo: @ReqNo?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <i class="fa fa-window-close"></i> No
+                </button>
+                <form id="approveForm" method="post" action="@Url.Action("ApproveRequest", "RequisitionApproval")">
+                    <input type="hidden" name="reqNo" value="@ReqNo" />
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-check-circle"></i> Yes
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Reject Modal *@
+<div class="modal fade" id="rejectRequestDetailModal" tabindex="-1" role="dialog" aria-labelledby="rejectRequestDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content card-style">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rejectRequestDetailModalLabel">Confirm Rejection</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to reject the request with ReqNo: <span id="deleteId" class="font-weight-bold"></span>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-window-close"></i> No</button>
+                <form id="deleteForm" method="post" action="@Url.Action("RejectRequest", "RequisitionApproval")">
+                    <input type="hidden" name="idNo" id="deleteIdInput" value="" />
+                    <button type="submit" class="btn btn-danger"><i class="fa fa-check"></i> Yes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Delete Modal *@
+<div class="modal fade" id="deleteRequestDetailModal" tabindex="-1" role="dialog" aria-labelledby="deleteRequestDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content card-style">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteRequestDetailModalLabel">Confirm Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete the request detail with IdNo: <span id="deleteId" class="font-weight-bold"></span>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-window-close"></i> No</button>
+                <form id="deleteForm" method="post" action="@Url.Action("DeleteRequestDetail", "RequisitionApproval")">
+                    <input type="hidden" name="idNo" id="deleteIdInput" value="" />
+                    <button type="submit" class="btn btn-danger"><i class="fa fa-check"></i> Yes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Update Quantity Modal *@
+<div class="modal fade" id="updateQuantityModal" tabindex="-1" role="dialog" aria-labelledby="updateQuantityModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content card-style">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateQuantityModalLabel">Amend Quantity</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="updateQuantityForm" method="post" action="@Url.Action("UpdateQuantity", "RequisitionApproval")">
+                    <div class="form-group">
+                        <label for="quantityRequested">Quantity Requested</label>
+                        <input type="text" id="quantityRequested" class="form-control" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="quantityApproved">Quantity Approve</label>
+                        <input type="number" id="quantityApproved" name="qtyReq" class="form-control" min="1" required />
+                        <input type="hidden" id="idNo" name="idNo" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" form="updateQuantityForm">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            $('#rejectRequestDetailModal').on('show.bs.modal', function (event) {
+                const button = $(event.relatedTarget);
+                const reqNo = button.data('id');
+                const modal = $(this);
+                modal.find('#deleteId').text(reqNo);
+                modal.find('#deleteIdInput').val(reqNo);
+            });
+
+            $('#deleteRequestDetailModal').on('show.bs.modal', function (event) {
+                const button = $(event.relatedTarget);
+                const idNo = button.data('id');
+                const modal = $(this);
+                modal.find('#deleteId').text(idNo);
+                modal.find('#deleteIdInput').val(idNo);
+            });
+
+            $('#updateQuantityModal').on('show.bs.modal', function (event) {
+                const button = $(event.relatedTarget); 
+                const idNo = button.data('id');
+                const qtyReq = button.data('qtyreq');
+
+                const modal = $(this);
+                modal.find('#quantityRequested').val(qtyReq); 
+                modal.find('#quantityApproved').val(qtyReq);  
+                modal.find('#idNo').val(idNo);                
+            });
+
+            $('#approveRequestDetailModal').on('show.bs.modal', function (event) {
+            });
+        });
+    </script>
+}

@@ -1,0 +1,143 @@
+﻿@model IEnumerable<MMS.Models.Inventory.RequestVM>
+@{
+    ViewBag.Title = "Requisition Approval";
+    Layout = "~/Views/Shared/_BestLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center" style="font-weight: bold; background-color: lightgrey;">
+        <span>Requisition Approval</span>
+        <span id="paginationInfo" class="text-info">@Html.Raw(ViewBag.PaginationInfo)</span>
+    </div>
+    <div class="pagination-info text-center text-primary" id="paginationInfo"></div>
+
+    <div class="card-body table-border-style">
+        <div class="row align-items-center">
+            <form method="get" action="@Url.Action("Index")" class="col-md-8 d-flex">
+                <div class="form-row flex-grow-1">
+                    <div class="form-group col-md-4">
+                        <input type="text" class="form-control" name="searchTerm" placeholder="Searching by Request No Here !" value="@ViewBag.SearchTerm" />
+                    </div>
+                    <div class="form-group col-md-2">
+                        <button type="submit" class="btn btn-primary fa fa-search">Search</button>
+                    </div>
+                </div>
+            </form>
+            <div class="col-md-4 d-flex justify-content-end align-items-center">
+                @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                {
+                    <button style="border:none" id="loadMore" class="btn btn-outline-primary position-relative" data-page="@ViewBag.CurrentPage">
+                        <span id="loadingIcon" class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span>
+                        <i class="fa fa-forward"></i> Next
+                    </button>
+                }
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover" id="commondata">
+                <thead>
+                    <tr>
+                        <th>Request No</th>
+                        <th>Category</th>
+                        <th>Request Date</th>
+                        <th>Department/Branch</th>
+                        <th>Requested By</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="requestTable">
+                    @foreach (var request in Model)
+                    {
+                        <tr>
+                            <td>@request.ReqNo</td>
+                            <td>@request.BatchNo</td>
+                            <td>
+                                @{
+                                    string formattedDate = "-";
+                                    if (DateTime.TryParse(request.ReqDate?.ToString(), out var date))
+                                    {
+                                        formattedDate = date.ToString("MM/dd/yyyy");
+                                    }
+                                }
+                                @formattedDate
+                            </td>
+                            <td>@request.ReqDept</td>
+                            <td>@request.FullName</td>
+                            <td>
+                                @Html.ActionLink(" Show", "Detail", "RequisitionApproval", new { reqNo = request.ReqNo }, new { @class = "btn btn-outline-primary fa fa-list" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+    $(document).ready(function () {
+        var dataTable = $('#commondata').DataTable();
+        if (!$.fn.dataTable.isDataTable('#commondata')) {
+            dataTable = $('#commondata').DataTable({
+                "ordering": true,
+                pageLength: 8,
+                lengthChange: true,
+                searching: true,
+                info: true,
+                paging: true,
+                autoWidth: true,
+                responsive: true,
+            });
+        }
+
+        function reinitializeLinks() {
+            $('#commondata tbody tr').each(function () {
+                var reqNo = $(this).find('td:first').text().trim();
+                var link = '@Url.Action("Detail", "RequisitionApproval")?reqNo=' + reqNo;
+                $(this).find('a.show-link').attr('href', link);
+            });
+        }
+
+        $(document).on("click", "#loadMore", function () {
+            var button = $(this);
+            var page = button.data("page") + 1;
+
+            button.prop("disabled", true).find("#loadingIcon").removeClass("d-none");
+
+            $.ajax({
+                url: '@Url.Action("Index")',
+                data: { page: page },
+                success: function (data) {
+                    if ($.fn.dataTable.isDataTable('#commondata')) {
+                        dataTable.clear();
+                        var newRows = $(data).find("#commondata tbody tr");
+                        newRows.each(function () {
+                            var rowData = [];
+                            $(this).find("td").each(function () {
+                                rowData.push($(this).html());
+                            });
+                            dataTable.row.add(rowData);
+                        });
+                        dataTable.draw();
+                        $("#paginationInfo").html($(data).find("#paginationInfo").html());
+                        var nextPage = $(data).find("#loadMore").data("page");
+                        if (nextPage) {
+                            button.data("page", nextPage).prop("disabled", false);
+                        } else {
+                            button.remove();
+                        }
+
+                        button.find("#loadingIcon").addClass("d-none");
+                        reinitializeLinks();
+                    }
+                },
+                error: function () {
+                    alert("Failed to load more data.");
+                    button.prop("disabled", false).find("#loadingIcon").addClass("d-none");
+                }
+            });
+        });
+    });
+    </script>
+}
