@@ -1,0 +1,67 @@
+﻿@model MMS.Models.Inventory.StoreVM
+
+@using (Html.BeginForm("Edit", "Store", FormMethod.Post, new { @id = "editStoreForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.StoreCode)
+    <input type="hidden" name="UserName" value="@Session["UserName"]" />
+    <div class="container">
+        <div class="row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.StoreName, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.StoreName, new { @class = "form-control", @placeholder = "Enter Store Name", @required = "required" })
+                @Html.ValidationMessageFor(model => model.StoreName, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.Address, new { @class = "form-control", @placeholder = "Enter Address" })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.AccountNo, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.AccountNo, new { @class = "form-control", @placeholder = "Enter Account Number" })
+                @Html.ValidationMessageFor(model => model.AccountNo, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.BranchCode, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.BranchCode, new { @class = "form-control", @placeholder = "Enter Branch Code" })
+                @Html.ValidationMessageFor(model => model.BranchCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.ShortCode, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.ShortCode, new { @class = "form-control", @placeholder = "Enter Short Code" })
+                @Html.ValidationMessageFor(model => model.ShortCode, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.StockCc, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.StockCc, new { @class = "form-control", @placeholder = "Enter Stock Cost Center" })
+                @Html.ValidationMessageFor(model => model.StockCc, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4">
+                @Html.CheckBoxFor(model => model.IsSatellite, new { @class = "form-check-input" })
+                @Html.LabelFor(model => model.IsSatellite, htmlAttributes: new { @class = "form-check-label" })
+            </div>
+
+            <div class="form-group col-md-4">
+                @Html.CheckBoxFor(model => model.IsTransit, new { @class = "form-check-input" })
+                @Html.LabelFor(model => model.IsTransit, htmlAttributes: new { @class = "form-check-label" })
+            </div>
+
+            <div class="form-group col-md-4">
+                @Html.CheckBoxFor(model => model.IsDamaged, new { @class = "form-check-input" })
+                @Html.LabelFor(model => model.IsDamaged, htmlAttributes: new { @class = "form-check-label" })
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-outline-primary">Save</button>
+        </div>
+    </div>
+}
