@@ -1,0 +1,120 @@
+﻿@model SharedLayer.Models.Inventory.tblCompany
+
+@{
+    ViewBag.Title = "Company";
+    Layout = "~/Views/Shared/_BestLayout.cshtml";
+}
+
+<div class="card support-bar overflow-hidden">
+    <div class="card-header">
+        <h5>Company Profile</h5>
+    </div>
+
+    @using (Html.BeginForm("Save", "Company", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="card-body pb-0">
+
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.CompanyName, null, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Country, null, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Country, new { @class = "form-control form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.City, null, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.City, new { @class = "form-control form-control" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Woreda, null, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Woreda, new { @class = "form-control form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Tel1, null, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Tel1, new { @class = "form-control form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Fax, null, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Fax, new { @class = "form-control form-control" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.POBox, null, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.POBox, new { @class = "form-control form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, null, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Website, null, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Website, new { @class = "form-control form-control" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.DepCalcMethod, null, new { @class = "form-label" })
+                        @Html.DropDownListFor(m => m.DepCalcMethod, new List<SelectListItem>
+                        {
+                            new SelectListItem { Text = "Period", Value = "Period" },
+                            new SelectListItem { Text = "Year", Value = "Year" }
+                        }, new { @class = "form-group form-control", @id = "DepCalcMethod" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.FinalBookValue, null, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.FinalBookValue, new { @class = "form-group form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.CurrentPeriod, null, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.CurrentPeriod, new { @class = "form-group form-control" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-primary">Save</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    }
+
+</div>
